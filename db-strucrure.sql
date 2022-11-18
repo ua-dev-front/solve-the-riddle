@@ -1,5 +1,6 @@
 CREATE TABLE riddles (
     id integer NOT NULL,
+    create_date timestamp default current_timestamp,
     riddle text,
     solution text
 );
@@ -27,7 +28,7 @@ CREATE TABLE user_data (
 CREATE TABLE users (
     id integer NOT NULL,
     login text,
-    password text
+    password_hash text
 );
 
 
@@ -38,6 +39,9 @@ CREATE SEQUENCE users_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
+
+
+ALTER SEQUENCE public.users_id_seq OWNED BY users.id;
 
 
 ALTER TABLE ONLY riddles ALTER COLUMN id SET DEFAULT nextval('riddles_id_seq'::regclass);
