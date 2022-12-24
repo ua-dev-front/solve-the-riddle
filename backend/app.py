@@ -1,28 +1,36 @@
-from flask import abort, Flask, request
+from flask import abort, Flask, request, session
 from flask_cors import CORS
+import os
 
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'c7efec1dc12e19fe45998e418f8bc20603eb026f'
+
 CORS(app, resources={r'*': {'origins': ['http://localhost:3000']}})
 
 
 @app.route('/logIn', methods=['POST'])
-def log_in() -> dict[str, bool]:
+def log_in(resp) -> dict[str, bool]:
     user_data = request.get_json()
     if type(user_data) != dict or user_data.keys() != {'login', 'password'}:
         abort(400)
+    user_id = os.urandom(12).hex()
+    resp.set_cookie('id', user_id)
+    session['user_id'] = user_id
     return {'authentication': True}
 
 
 @app.route('/logOut', methods=['GET'])
 def log_out() -> None:
-    password = request.args
+    user_id = request.cookies.get('id')
+    if session['user_id'] != user_id:
+        abort(404, description="CSRF protection worked")
 
 
 @app.route('/addRiddle', methods=['POST'])
-riddle = 'riddle'
-answer = 'answer'
 def add_riddle() -> str:
+    riddle = 'riddle'
+    answer = 'answer'
     data = request.get_json()
     if type(data) != dict or data.keys() != {riddle, answer}:
         abort(400)
@@ -31,11 +39,11 @@ def add_riddle() -> str:
 
 
 @app.route('/verifyAnswer', methods=['GET'])
-riddle_id = 'id'
-answer = 'answer'
 def verify_answer() -> dict[str, bool]:
+    riddle_id = 'id'
+    answer = 'answer'
     riddle_data = request.args.to_dict()
-    if type(riddle) != dict or (riddle_data.keys() != {answer, riddle_id} or not riddle_data[riddle_id].isnumeric()):
+    if type(riddle_data) != dict or (riddle_data.keys() != {answer, riddle_id} or not riddle_data[riddle_id].isnumeric()):
         abort(400)
     return {'correct': True}
 
