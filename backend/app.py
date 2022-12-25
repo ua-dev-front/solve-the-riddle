@@ -1,30 +1,32 @@
-from flask import abort, Flask, request, session
+from flask import abort, Flask, make_response, request, session
 from flask_cors import CORS
 import os
+from dotenv import load_dotenv
 
-
+load_dotenv()
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'c7efec1dc12e19fe45998e418f8bc20603eb026f'
-
+app.config['SECRET_KEY'] = os.getenv('S_KEY')
 CORS(app, resources={r'*': {'origins': ['http://localhost:3000']}})
 
 
 @app.route('/logIn', methods=['POST'])
-def log_in(resp) -> dict[str, bool]:
+def log_in() -> dict[str, bool]:
     user_data = request.get_json()
     if type(user_data) != dict or user_data.keys() != {'login', 'password'}:
         abort(400)
-    user_id = os.urandom(12).hex()
-    resp.set_cookie('id', user_id)
-    session['user_id'] = user_id
-    return {'authentication': True}
+    user_key = os.urandom(12).hex()
+    resp = make_response()
+    resp.set_cookie('user_key', user_key)
+    session['user_key'] = user_key
+    return {'result': True}
 
 
 @app.route('/logOut', methods=['GET'])
-def log_out() -> None:
-    user_id = request.cookies.get('id')
-    if session['user_id'] != user_id:
-        abort(404, description="CSRF protection worked")
+def log_out() -> dict[str, bool]:
+    user_key = request.args.get('user_key')
+    if len(user_key) != 12 or session['user_key'] != user_key:
+        abort(400)
+    return {'result': True}
 
 
 @app.route('/addRiddle', methods=['POST'])
