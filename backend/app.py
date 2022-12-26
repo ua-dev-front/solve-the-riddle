@@ -25,7 +25,7 @@ def log_in() -> dict[str, bool]:
 @app.route('/logOut', methods=['GET'])
 def log_out() -> dict[str, bool]:
     user_key = request.args.get('user_key')
-    if session['user_key'] != user_key:
+    if (not session.get('user_key') or user_key) or session['user_key'] != user_key:
         abort(400)
     return {'result': True}
 
@@ -46,11 +46,11 @@ def verify_answer() -> dict[str, bool]:
     riddle_id = 'id'
     answer = 'answer'
     riddle_data = request.args.to_dict()
-    if type(riddle_data) != dict or (riddle_data.keys() != {answer, riddle_id} or not riddle_data[riddle_id].isnumeric()):
+    if riddle_data.keys() != {answer, riddle_id} or not riddle_data[riddle_id].isnumeric():
         abort(400)
     return {'correct': True}
 
 
 @app.route('/', methods=['GET'])
-def index() -> dict[str, list[dict[str, str, int]]]:
-    return {'riddles': [{'id': 1, 'create_date': '23.11.2022', 'riddle': '...'}]}
+def index() -> dict[str, list[dict]]:
+    return {'riddles': [{'id': 1, 'creationDate': '23.11.2022', 'riddle': '...'}]}
