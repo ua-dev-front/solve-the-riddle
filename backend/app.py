@@ -1,7 +1,8 @@
+import os
+
+from dotenv import load_dotenv
 from flask import abort, Flask, make_response, request, session
 from flask_cors import CORS
-import os
-from dotenv import load_dotenv
 
 load_dotenv()
 app = Flask(__name__)
@@ -24,7 +25,7 @@ def log_in() -> dict[str, bool]:
 @app.route('/logOut', methods=['GET'])
 def log_out() -> dict[str, bool]:
     user_key = request.args.get('user_key')
-    if len(user_key) != 12 or session['user_key'] != user_key:
+    if session['user_key'] != user_key:
         abort(400)
     return {'result': True}
 
