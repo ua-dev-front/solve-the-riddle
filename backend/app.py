@@ -24,8 +24,9 @@ def log_in() -> dict[str, bool]:
 
 @app.route('/logOut', methods=['GET'])
 def log_out() -> dict[str, bool]:
-    user_key = request.args.get('user_key')
-    if not session.get('user_key') or not user_key or session['user_key'] != user_key:
+    user_key = 'user_key'
+    data = request.args.to_dict()
+    if not user_key in session.keys() or not user_key in data.keys() or session[user_key] != data[user_key]:
         abort(400)
     return {'result': True}
 
