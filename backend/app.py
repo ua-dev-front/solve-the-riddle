@@ -13,7 +13,7 @@ CORS(app, resources={r'*': {'origins': ['http://localhost:3000']}})
 @app.route('/register', methods=['POST'])
 def register() -> dict[str, bool]:
     user_data = request.get_json()
-    if type(user_data) != dict or user_data.keys() != {'login', 'password1', 'password2'}:
+    if type(user_data) != dict or user_data.keys() != {'login', 'password'}:
         abort(400)
     return {'result': True}
 
