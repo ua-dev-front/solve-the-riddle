@@ -10,6 +10,14 @@ app.config['SECRET_KEY'] = os.getenv('S_KEY')
 CORS(app, resources={r'*': {'origins': ['http://localhost:3000']}})
 
 
+@app.route('/register', methods=['POST'])
+def register() -> dict[str, bool]:
+    user_data = request.get_json()
+    if type(user_data) != dict or user_data.keys() != {'login', 'password1', 'password2'}:
+        abort(400)
+    return {'result': True}
+
+
 @app.route('/logIn', methods=['POST'])
 def log_in() -> dict[str, bool]:
     user_data = request.get_json()
