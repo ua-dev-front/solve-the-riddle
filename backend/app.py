@@ -62,4 +62,4 @@ def verify_answer() -> dict[str, bool]:
 
 @app.route('/', methods=['GET'])
 def index() -> dict[str, list[dict]]:
-    return {'riddles': [{'id': 1, 'creationDate': '23.11.2022', 'riddle': '...'}]}
+    return {'riddles': [{'id': 1, 'creationDate': '23.11.2022', 'riddle': '...', 'answer': '...'}]}
