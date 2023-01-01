@@ -1,4 +1,5 @@
 import os
+import psycopg2
 
 from dotenv import load_dotenv
 from flask import abort, Flask, make_response, request, session
@@ -8,6 +9,15 @@ load_dotenv()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('S_KEY')
 CORS(app, resources={r'*': {'origins': ['http://localhost:3000']}})
+
+con = psycopg2.connect(
+    host=os.getenv('HOST'),
+    database=os.getenv('DATABASE'),
+    user=os.getenv('USER'),
+    password=os.getenv('PASSWORD'),
+    port=os.getenv('DB_PORT')
+)
+cur = con.cursor()
 
 
 @app.route('/register', methods=['POST'])
