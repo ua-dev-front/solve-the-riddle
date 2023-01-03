@@ -4,7 +4,7 @@ import psycopg2
 from dotenv import load_dotenv
 from flask import abort, Flask, make_response, request, session
 from flask_cors import CORS
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash
 
 load_dotenv()
 app = Flask(__name__)
@@ -16,7 +16,7 @@ con = psycopg2.connect(
     database=os.getenv('DATABASE'),
     user=os.getenv('USER'),
     password=os.getenv('PASSWORD'),
-    port=os.getenv('PORT')
+    port=os.getenv('DB_PORT')
 )
 cur = con.cursor()
 
