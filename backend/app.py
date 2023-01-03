@@ -4,6 +4,7 @@ import psycopg2
 from dotenv import load_dotenv
 from flask import abort, Flask, make_response, request, session
 from flask_cors import CORS
+from werkzeug.security import generate_password_hash, check_password_hash
 
 load_dotenv()
 app = Flask(__name__)
@@ -15,16 +16,21 @@ con = psycopg2.connect(
     database=os.getenv('DATABASE'),
     user=os.getenv('USER'),
     password=os.getenv('PASSWORD'),
-    port=os.getenv('DB_PORT')
+    port=os.getenv('PORT')
 )
 cur = con.cursor()
 
 
 @app.route('/register', methods=['POST'])
 def register() -> dict[str, bool]:
+    login = 'login'
+    password = 'password'
     user_data = request.get_json()
-    if type(user_data) != dict or user_data.keys() != {'login', 'password'}:
+    if type(user_data) != dict or user_data.keys() != {login, password}:
         abort(400)
+    cur.execute('insert into users (login, password_hash) values (%s, %s)',
+                (user_data[login], generate_password_hash(user_data[password])))
+    con.commit()
     return {'result': True}
 
 
