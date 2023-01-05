@@ -21,6 +21,10 @@ con = psycopg2.connect(
 cur = con.cursor()
 
 
+def key_generation() -> str:
+    return os.urandom(12).hex()
+
+
 @app.route('/register', methods=['POST'])
 def register() -> dict[str, bool]:
     login = 'login'
@@ -40,18 +44,21 @@ def log_in() -> dict[str, bool]:
     password = 'password'
     user_key = 'user_key'
     result = 'result'
+    user_id = 'user_id'
     user_data = request.get_json()
-    if type(user_data) != dict or user_data.keys() != {login, password}:
+    if type(user_data) != dict or user_data.keys() != {login, password} \
+            or (type(user_data[login]) and type(user_data[password])) != str:
         abort(400)
     cur.execute('select id, password_hash from users where login = %s', (user_data[login],))
-    initialData = cur.fetchall()
-    if initialData and check_password_hash(initialData[0][1], user_data[password]):
-        key = os.urandom(12).hex()
+    initialData = cur.fetchone()
+    if initialData and check_password_hash(initialData[1], user_data[password]):
+        key = key_generation()
         resp = make_response()
         resp.set_cookie(user_key, key)
-        session[user_key], session['user_id'] = key, initialData[0][0]
+        session[user_key], session[user_id] = key, initialData[0]
         return {result: True}
-    return {result: False}
+    else:
+        return {result: False}
 
 
 @app.route('/logOut', methods=['GET'])
