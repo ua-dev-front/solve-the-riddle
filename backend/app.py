@@ -50,9 +50,9 @@ def log_in() -> dict[str, str | None]:
             or (type(user_data[login]) != str or type(user_data[password])) != str:
         abort(400)
     cur.execute('select id, password_hash from users where login = %s', (user_data[login],))
-    initialData = cur.fetchone()
-    if initialData:
-        current_id, psw_hash = initialData
+    initial_data = cur.fetchone()
+    if initial_data:
+        current_id, psw_hash = initial_data
         if check_password_hash(psw_hash, user_data[password]):
             key = generate_key()
             resp = make_response()
