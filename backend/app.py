@@ -4,7 +4,7 @@ import psycopg2
 from dotenv import load_dotenv
 from flask import abort, Flask, make_response, request, session
 from flask_cors import CORS
-from werkzeug.security import generate_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 
 load_dotenv()
 app = Flask(__name__)
@@ -21,6 +21,10 @@ con = psycopg2.connect(
 cur = con.cursor()
 
 
+def generate_key() -> str:
+    return os.urandom(12).hex()
+
+
 @app.route('/register', methods=['POST'])
 def register() -> dict[str, bool]:
     login = 'login'
@@ -35,15 +39,30 @@ def register() -> dict[str, bool]:
 
 
 @app.route('/logIn', methods=['POST'])
-def log_in() -> dict[str, bool]:
+def log_in() -> dict[str, str | None]:
+    login = 'login'
+    password = 'password'
+    error = 'error'
+    user_key = 'user_key'
+    user_id = 'user_id'
     user_data = request.get_json()
-    if type(user_data) != dict or user_data.keys() != {'login', 'password'}:
+    if type(user_data) != dict or user_data.keys() != {login, password} \
+            or (type(user_data[login]) != str or type(user_data[password])) != str:
         abort(400)
-    user_key = os.urandom(12).hex()
-    resp = make_response()
-    resp.set_cookie('user_key', user_key)
-    session['user_key'] = user_key
-    return {'result': True}
+    cur.execute('select id, password_hash from users where login = %s', (user_data[login],))
+    initial_data = cur.fetchone()
+    if initial_data:
+        current_id, psw_hash = initial_data
+        if check_password_hash(psw_hash, user_data[password]):
+            key = generate_key()
+            resp = make_response()
+            resp.set_cookie(user_key, key)
+            session[user_key], session[user_id] = key, current_id
+            return {error: None}
+        else:
+            return {error: password}
+    else:
+        return {error: login}
 
 
 @app.route('/logOut', methods=['GET'])
