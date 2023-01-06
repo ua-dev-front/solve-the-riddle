@@ -71,6 +71,9 @@ def log_out() -> dict[str, bool]:
     data = request.args.to_dict()
     if not user_key in session.keys() or not user_key in data.keys() or session[user_key] != data[user_key]:
         abort(400)
+    session.clear()
+    resp = make_response()
+    resp.set_cookie(user_key, '', expires=0)
     return {'result': True}
 
 
