@@ -7,6 +7,8 @@ import psycopg2
 from werkzeug.security import check_password_hash, generate_password_hash
 
 USER_KEY = 'user_key'
+MAX_RIDDLE_LEN = 5000
+MAX_ANSWER_LEN = 500
 
 load_dotenv()
 app = Flask(__name__)
@@ -78,18 +80,23 @@ def log_out() -> dict[str, bool]:
 
 
 @app.route('/addRiddle', methods=['POST'])
-def add_riddle() -> dict[str, str]:
+def add_riddle() -> dict[None | str, dict]:
     riddle = 'riddle'
     answer = 'answer'
+    error = 'error'
     data = request.get_json()
-    if type(data) != dict or data.keys() != {riddle, answer} or type(data[riddle]) != str or type(data[answer]) != str\
-            or len(data[riddle]) > 5000 or len(data[answer]) > 500:
+    if type(data) != dict or data.keys() != {riddle, answer} or type(data[riddle]) != str or type(data[answer]) != str:
         abort(400)
-    riddle_data = data[riddle], data[answer]
-    cur.execute('insert into riddles (riddle, solution) values (%s, %s) returning id, create_date', riddle_data)
-    con.commit()
-    riddle_id, creation_date = cur.fetchone()
-    return {'id': riddle_id, 'creationDate': str(creation_date.date())}
+    if len(data[riddle]) > MAX_RIDDLE_LEN:
+        return {error: 'long_riddle'}
+    elif len(data[answer]) > MAX_ANSWER_LEN:
+        return {error: 'long_answer'}
+    else:
+        riddle_data = data[riddle], data[answer]
+        cur.execute('insert into riddles (riddle, solution) values (%s, %s) returning id, create_date', riddle_data)
+        con.commit()
+        riddle_id, creation_date = cur.fetchone()
+        return {error: None, 'data': {'id': riddle_id, 'creationDate': str(creation_date.date())}}
 
 
 @app.route('/verifyAnswer', methods=['GET'])
