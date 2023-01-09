@@ -1,4 +1,6 @@
 import os
+from typing import Tuple, Any
+
 import psycopg2
 
 from dotenv import load_dotenv
@@ -85,7 +87,10 @@ def add_riddle() -> str:
     if type(data) != dict or data.keys() != {riddle, answer}:
         abort(400)
     riddle_data = data[riddle], data[answer]
-    return '5'
+    cur.execute('insert into riddles (riddle, solution) values (%s, %s) returning id, create_date', riddle_data)
+    con.commit()
+    riddle_id, creation_date = cur.fetchone()
+    return '{} {}'.format(riddle_id, creation_date.date())
 
 
 @app.route('/verifyAnswer', methods=['GET'])
