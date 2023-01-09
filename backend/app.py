@@ -6,6 +6,8 @@ from flask import abort, Flask, make_response, request, session
 from flask_cors import CORS
 from werkzeug.security import check_password_hash, generate_password_hash
 
+USER_KEY = 'user_key'
+
 load_dotenv()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('S_KEY')
@@ -43,7 +45,6 @@ def log_in() -> dict[str, str | None]:
     login = 'login'
     password = 'password'
     error = 'error'
-    user_key = 'user_key'
     user_id = 'user_id'
     user_data = request.get_json()
     if type(user_data) != dict or user_data.keys() != {login, password} \
@@ -56,8 +57,8 @@ def log_in() -> dict[str, str | None]:
         if check_password_hash(psw_hash, user_data[password]):
             key = generate_key()
             resp = make_response()
-            resp.set_cookie(user_key, key)
-            session[user_key], session[user_id] = key, current_id
+            resp.set_cookie(USER_KEY, key)
+            session[USER_KEY], session[user_id] = key, current_id
             return {error: None}
         else:
             return {error: password}
@@ -67,10 +68,12 @@ def log_in() -> dict[str, str | None]:
 
 @app.route('/logOut', methods=['GET'])
 def log_out() -> dict[str, bool]:
-    user_key = 'user_key'
     data = request.args.to_dict()
-    if not user_key in session.keys() or not user_key in data.keys() or session[user_key] != data[user_key]:
+    if USER_KEY not in session.keys() or USER_KEY not in data.keys() or session[USER_KEY] != data[USER_KEY]:
         abort(400)
+    session.clear()
+    resp = make_response()
+    resp.set_cookie(USER_KEY, '', expires=0)
     return {'result': True}
 
 
