@@ -95,7 +95,6 @@ def add_riddle() -> dict[str, str | dict[str, int | str] | None]:
     cur.execute('insert into riddles (riddle, solution) values (%s, %s) returning id, create_date', riddle_data)
     con.commit()
     riddle_id, creation_date = cur.fetchone()
-    print(type(riddle_id))
     return {error: None, 'data': {'id': riddle_id, 'creationDate': str(creation_date.date())}}
 
 
