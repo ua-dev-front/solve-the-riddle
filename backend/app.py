@@ -103,9 +103,18 @@ def verify_answer() -> dict[str, bool]:
     riddle_id = 'id'
     answer = 'answer'
     riddle_data = request.args.to_dict()
-    if riddle_data.keys() != {answer, riddle_id} or not riddle_data[riddle_id].isnumeric():
+    if riddle_data.keys() != {answer, riddle_id} or not riddle_data[riddle_id].isnumeric() \
+            or type(riddle_data[answer]) != str:
         abort(400)
-    return {'correct': True}
+    cur.execute('select solution from riddles where id = %s', (riddle_data[riddle_id],))
+    initial_data = cur.fetchone()
+    if initial_data:
+        user_data = session['user_id'], riddle_data[riddle_id], riddle_data[answer]
+        cur.execute('insert into user_data (user_id, riddle_id, answer) values (%s, %s, %s)', user_data)
+        con.commit()
+        return {'correct': initial_data[0] == riddle_data[answer]}
+    else:
+        abort(404)
 
 
 @app.route('/', methods=['GET'])
