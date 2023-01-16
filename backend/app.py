@@ -7,6 +7,7 @@ import psycopg2
 from werkzeug.security import check_password_hash, generate_password_hash
 
 USER_KEY = 'user_key'
+USER_ID = 'user_id'
 MAX_RIDDLE_LEN = 5000
 MAX_ANSWER_LEN = 500
 
@@ -29,6 +30,10 @@ def generate_key() -> str:
     return os.urandom(12).hex()
 
 
+def normalise(answer) -> str:
+    return " ".join(answer.split()).lower()
+
+
 @app.route('/register', methods=['POST'])
 def register() -> dict[str, bool]:
     login = 'login'
@@ -47,7 +52,6 @@ def log_in() -> dict[str, str | None]:
     login = 'login'
     password = 'password'
     error = 'error'
-    user_id = 'user_id'
     user_data = request.get_json()
     if type(user_data) != dict or user_data.keys() != {login, password} \
             or (type(user_data[login]) != str or type(user_data[password])) != str:
@@ -60,7 +64,7 @@ def log_in() -> dict[str, str | None]:
             key = generate_key()
             resp = make_response()
             resp.set_cookie(USER_KEY, key)
-            session[USER_KEY], session[user_id] = key, current_id
+            session[USER_KEY], session[USER_ID] = key, current_id
             return {error: None}
         else:
             return {error: password}
@@ -103,16 +107,18 @@ def verify_answer() -> dict[str, bool]:
     riddle_id = 'id'
     answer = 'answer'
     riddle_data = request.args.to_dict()
-    if riddle_data.keys() != {answer, riddle_id} or not riddle_data[riddle_id].isnumeric() \
-            or type(riddle_data[answer]) != str:
+    if USER_ID not in session.keys() or riddle_data.keys() != {answer, riddle_id} \
+            or not riddle_data[riddle_id].isnumeric():
         abort(400)
+    riddle_data[riddle_id] = int(riddle_data[riddle_id])
     cur.execute('select solution from riddles where id = %s', (riddle_data[riddle_id],))
     initial_data = cur.fetchone()
     if initial_data:
-        user_data = session['user_id'], riddle_data[riddle_id], riddle_data[answer]
-        cur.execute('insert into user_data (user_id, riddle_id, answer) values (%s, %s, %s)', user_data)
+        cur.execute('INSERT INTO user_data (user_id, riddle_id, answer) VALUES (%s, %s, %s) '
+                    'ON CONFLICT (user_id, riddle_id) DO UPDATE SET answer = EXCLUDED.answer',
+                    (session[USER_ID], riddle_data[riddle_id], riddle_data[answer]))
         con.commit()
-        return {'correct': initial_data[0] == riddle_data[answer]}
+        return {'correct': initial_data[0].lower() == normalise(riddle_data[answer])}
     else:
         abort(404)
 

@@ -56,3 +56,6 @@ ALTER TABLE ONLY riddles
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pk PRIMARY KEY (id);
+
+
+CREATE UNIQUE INDEX user_data_index ON public.user_data USING btree (user_id, riddle_id);
