@@ -30,8 +30,8 @@ def generate_key() -> str:
     return os.urandom(12).hex()
 
 
-def normalise(answer) -> str:
-    return " ".join(answer.split()).lower()
+def normalize(answer) -> str:
+    return ' '.join(answer.split()).lower()
 
 
 @app.route('/register', methods=['POST'])
@@ -107,18 +107,18 @@ def verify_answer() -> dict[str, bool]:
     riddle_id = 'id'
     answer = 'answer'
     riddle_data = request.args.to_dict()
-    if USER_ID not in session.keys() or riddle_data.keys() != {answer, riddle_id} \
-            or not riddle_data[riddle_id].isnumeric():
+    if riddle_data.keys() != {answer, riddle_id} or not riddle_data[riddle_id].isnumeric():
         abort(400)
-    riddle_data[riddle_id] = int(riddle_data[riddle_id])
-    cur.execute('select solution from riddles where id = %s', (riddle_data[riddle_id],))
+    cur.execute('select solution from riddles where id = %s', (int(riddle_data[riddle_id]),))
     initial_data = cur.fetchone()
+    session[USER_ID] = 2
     if initial_data:
-        cur.execute('INSERT INTO user_data (user_id, riddle_id, answer) VALUES (%s, %s, %s) '
-                    'ON CONFLICT (user_id, riddle_id) DO UPDATE SET answer = EXCLUDED.answer',
-                    (session[USER_ID], riddle_data[riddle_id], riddle_data[answer]))
-        con.commit()
-        return {'correct': initial_data[0].lower() == normalise(riddle_data[answer])}
+        if USER_ID in session.keys():
+            cur.execute('insert into user_data (user_id, riddle_id, answer) values (%s, %s, %s) '
+                        'on conflict (user_id, riddle_id) do update set answer = excluded.answer',
+                        (session[USER_ID], int(riddle_data[riddle_id]), riddle_data[answer]))
+            con.commit()
+        return {'correct': normalize(initial_data[0]) == normalize(riddle_data[answer])}
     else:
         abort(404)
 

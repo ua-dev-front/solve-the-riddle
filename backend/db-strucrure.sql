@@ -41,7 +41,7 @@ CREATE SEQUENCE users_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.users_id_seq OWNED BY users.id;
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 ALTER TABLE ONLY riddles ALTER COLUMN id SET DEFAULT nextval('riddles_id_seq'::regclass);
@@ -58,4 +58,4 @@ ALTER TABLE ONLY users
     ADD CONSTRAINT users_pk PRIMARY KEY (id);
 
 
-CREATE UNIQUE INDEX user_data_index ON public.user_data USING btree (user_id, riddle_id);
+CREATE UNIQUE INDEX user_data_index ON user_data USING btree (user_id, riddle_id);
