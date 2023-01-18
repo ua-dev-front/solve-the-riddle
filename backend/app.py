@@ -111,7 +111,6 @@ def verify_answer() -> dict[str, bool]:
         abort(400)
     cur.execute('select solution from riddles where id = %s', (int(riddle_data[riddle_id]),))
     initial_data = cur.fetchone()
-    session[USER_ID] = 2
     if initial_data:
         if USER_ID in session.keys():
             cur.execute('insert into user_data (user_id, riddle_id, answer) values (%s, %s, %s) '
