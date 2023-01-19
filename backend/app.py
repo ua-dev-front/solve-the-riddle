@@ -124,4 +124,16 @@ def verify_answer() -> dict[str, bool]:
 
 @app.route('/', methods=['GET'])
 def index() -> dict[str, list[dict]]:
-    return {'riddles': [{'id': 1, 'creationDate': '23.11.2022', 'riddle': '...', 'answer': '...'}]}
+    data = []
+    cur.execute('select id, create_date, riddle from riddles')
+    for riddle_data in cur.fetchall():
+        riddle_id, creation_date, riddle = riddle_data
+        if USER_ID in session.keys():
+            cur.execute('select answer from user_data where (user_id, riddle_id) = (%s, %s)',
+                        (session[USER_ID], riddle_id))
+            answer = cur.fetchone()
+        else:
+            answer = None
+        data.append({'id': riddle_id, 'creationDate': str(creation_date.date()), 'riddle': riddle,
+                     'answer': answer[0] if answer else None})
+    return {'riddles': data}
