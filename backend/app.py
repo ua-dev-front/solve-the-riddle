@@ -125,20 +125,15 @@ def verify_answer() -> dict[str, bool]:
 @app.route('/', methods=['GET'])
 def index() -> dict[str, list[dict]]:
     data = []
+    user_data = {}
     if USER_ID in session.keys():
         cur.execute('select riddle_id, answer from user_data where user_id = %s', str(session[USER_ID]))
-        user_data = cur.fetchall()
-    else:
-        user_data = None
+        for answer_data in cur.fetchall():
+            riddle_id, answer = answer_data
+            user_data[riddle_id] = answer
     cur.execute('select id, create_date, riddle from riddles')
     for riddle_data in cur.fetchall():
-        needed_answer = None
         riddle_id, creation_date, riddle = riddle_data
-        if user_data:
-            for answer_data in user_data:
-                riddle_id2, answer = answer_data
-                if riddle_id == riddle_id2:
-                    needed_answer = answer
         data.append({'id': riddle_id, 'creationDate': str(creation_date.date()), 'riddle': riddle,
-                     'answer': needed_answer})
+                     'answer': user_data[riddle_id] if riddle_id in user_data.keys() else None})
     return {'riddles': data}
