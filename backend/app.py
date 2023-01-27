@@ -96,7 +96,7 @@ def add_riddle() -> dict[str, str | dict[str, int | str] | None]:
     if len(data[answer]) > MAX_ANSWER_LEN:
         return {error: 'long_answer'}
     riddle_data = data[riddle], data[answer]
-    cur.execute('insert into riddles (riddle, solution) values (%s, %s) returning id, create_date', riddle_data)
+    cur.execute('insert into riddles (riddle, solution) values (%s, %s) returning id, creation_date', riddle_data)
     con.commit()
     riddle_id, creation_date = cur.fetchone()
     return {error: None, 'data': {'id': riddle_id, 'creationDate': str(creation_date.date())}}
@@ -124,16 +124,12 @@ def verify_answer() -> dict[str, bool]:
 
 @app.route('/', methods=['GET'])
 def index() -> dict[str, list[dict]]:
-    data = []
-    user_data = {}
+    user_data = dict()
     if USER_ID in session.keys():
         cur.execute('select riddle_id, answer from user_data where user_id = %s', str(session[USER_ID]))
-        for answer_data in cur.fetchall():
-            riddle_id, answer = answer_data
+        for riddle_id, answer in cur.fetchall():
             user_data[riddle_id] = answer
-    cur.execute('select id, create_date, riddle from riddles')
-    for riddle_data in cur.fetchall():
-        riddle_id, creation_date, riddle = riddle_data
-        data.append({'id': riddle_id, 'creationDate': str(creation_date.date()), 'riddle': riddle,
-                     'answer': user_data[riddle_id] if riddle_id in user_data.keys() else None})
-    return {'riddles': data}
+    cur.execute('select id, creation_date, riddle from riddles order by id')
+    return {'riddles': [{'id': riddle_id, 'creationDate': creation_date, 'riddle': riddle,
+                        'answer': user_data.get(riddle_id) if riddle_id in user_data.keys() else None}
+                        for riddle_id, creation_date, riddle in cur.fetchall()]}
