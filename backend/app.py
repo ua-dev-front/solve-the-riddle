@@ -124,7 +124,7 @@ def verify_answer() -> dict[str, bool]:
 
 @app.route('/', methods=['GET'])
 def index() -> dict[str, list[dict]]:
-    user_data = {}
+    user_data: dict[int, str] = {}
     if USER_ID in session.keys():
         cur.execute('select riddle_id, answer from user_data where user_id = %s', str(session[USER_ID]))
         for riddle_id, answer in cur.fetchall():
