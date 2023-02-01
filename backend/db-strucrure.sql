@@ -1,6 +1,6 @@
 CREATE TABLE riddles (
     id integer NOT NULL,
-    create_date timestamp default current_timestamp,
+    creation_date timestamp default current_timestamp,
     riddle text,
     solution text
 );
