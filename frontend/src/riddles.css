@@ -1,0 +1,21 @@
+.container {
+  width: 1250px;
+  margin: 0 auto;
+}
+
+.block {
+  padding: 10px 10px;
+  width: 1200px;
+  height: 30px;
+  background: linear-gradient(90.08deg, #F7F7F7 0%, rgba(246, 246, 246, 0.66) 99.86%);
+  border-radius: 20px;
+  position: relative;
+  margin: 15px;
+}
+
+.riddle {
+  padding: 1px 5px;
+  font-size: 18px;
+  width: 1190px;
+  position: relative;
+}
