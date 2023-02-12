@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
   return (
-    <p>Guess the Riddle</p>
+    <p>Solve the Riddle</p>
   );
 }
 
