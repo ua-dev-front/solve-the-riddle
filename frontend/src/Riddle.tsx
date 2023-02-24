@@ -1,11 +1,17 @@
 import './riddles.css';
 
-export type Props = {riddle: string};
+export type Props = {
+    riddle: string,
+    date: string
+};
 
-function Riddle({riddle}: Props) {
+function Riddle({riddle, date}: Props) {
     return (
-        <div className='block'>
-            <div className='riddle'>{riddle}</div>
+        <div>
+            <div className={'date'}>{date}</div>
+            <div className={'block'}>
+                <div className={'text'}>{riddle}</div>
+            </div>
         </div>
     );
 }
