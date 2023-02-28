@@ -1,3 +1,7 @@
+.container {
+  min-width: 320px;
+}
+
 .line-container {
   margin: 40px 36px 0 36px;
 }
@@ -21,7 +25,7 @@
   width: 135px;
   height: 22px;
   top: -17px;
-  right: 0.8px;
+  right: 0.2mm;
   border-top: 1px solid #000000;
   border-right: 1px solid #000000;
   border-left: 1px solid #000000;
@@ -33,7 +37,7 @@
   position: relative;
   width: calc(50% + 110px);
   height: 22px;
-  right: 1.6px;
+  right: 0.4mm;
   border-bottom: 1px solid #000000;
   border-left: 1px solid #000000;
   border-bottom-left-radius: 10px;
@@ -73,7 +77,11 @@
   .line1 {
     width: 30px;
   }
+  .line2 {
+    right: 0.25mm;
+  }
   .line3 {
+    right: 0.51mm;
     width: calc(100% - 169px);
   }
   .riddle {
