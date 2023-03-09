@@ -1,0 +1,33 @@
+.riddle {
+  margin: auto;
+  width: min(90%, 560px);
+  position: relative;
+}
+
+.riddle_date {
+  font-family: 'Inter', serif;
+  color: #757575;
+  font-size: 11px;
+  padding: 30px 0 4px 10px;
+  position: relative;
+}
+
+.riddle_block {
+  background: linear-gradient(90deg, #F7F7F7 0%, rgba(246, 246, 246, 1) 99%);
+  border-radius: 20px;
+}
+
+
+.riddle_text {
+  padding: 12px 15px;
+  font-family: 'Courgette', cursive;
+  font-size: 14px;
+  position: relative;
+  width: 68%;
+}
+
+@media screen and (max-width: 632px) {
+  .riddle {
+    width: calc(100% - 72px);
+  }
+}
