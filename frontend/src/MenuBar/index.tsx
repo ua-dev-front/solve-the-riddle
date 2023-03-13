@@ -2,10 +2,10 @@ import './styles.css';
 
 function MenuBar() {
     return (
-        <div className="line-container">
-            <div className="line1"></div>
-            <div className="line2">View Riddles</div>
-            <div className="line3"></div>
+        <div className="menu_bar">
+            <div className="menu_bar1"></div>
+            <div className="menu_bar2">View Riddles</div>
+            <div className="menu_bar3"></div>
         </div>
     );
 }

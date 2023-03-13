@@ -1,17 +1,18 @@
-.line-container {
+.menu_bar {
   flex-wrap: nowrap;
   display: flex;
   margin: 20px 36px 0 36px;
 }
 
-.line1 {
+.menu_bar1 {
   width: calc(50% - 250px);
   border-bottom: 1px solid black;
 }
 
-.line2 {
+.menu_bar2 {
   font-size: 16px;
   font-family: 'Inter', sans-serif;
+  font-weight: 500;
   text-align: center;
   line-height: 42px;
   padding: 0 25px 0 25px;
@@ -23,17 +24,17 @@
   position: relative;
 }
 
-.line3 {
+.menu_bar3 {
   position: relative;
   width: calc(50% + 99px);
   border-bottom: 1px solid black;
 }
 
 @media screen and (max-width: 632px) {
-  .line1 {
+  .menu_bar1 {
     width: 30px;
   }
-  .line3 {
+  .menu_bar3 {
     width: calc(100% - 181px);
   }
 }
