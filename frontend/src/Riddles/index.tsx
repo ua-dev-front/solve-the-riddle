@@ -2,13 +2,17 @@ import Riddle from '../Riddle';
 import './styles.css';
 
 export type Props = {
-    riddles: Record<string, any>[]
+    riddles: {
+        riddle: string,
+        id: number,
+        creationDate: Date
+    }[]
 };
 
-function Riddles(riddles: Props) {
+function Riddles({riddles}: Props) {
     return (
         <div className="riddles">
-            {Object.values(riddles)[0].map(({riddle, id, creationDate}) => (<Riddle riddle={riddle} id={id}
+            {riddles.map(({riddle, id, creationDate}) => (<Riddle riddle={riddle} id={id}
                                               creationDate={creationDate} key={id} />))}
         </div>
     );
