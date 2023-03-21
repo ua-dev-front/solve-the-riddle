@@ -1,0 +1,13 @@
+.CheckButton {
+    position: relative;
+    width: 23px;
+    height: 23px;
+    border: 1px solid #945D0B;
+    border-radius: 2px;
+}
+
+.CheckButton_arrow {
+    position: absolute;
+    top: 30%;
+    left: 20%;
+}

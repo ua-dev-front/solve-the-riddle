@@ -1,9 +1,11 @@
 import './styles.css';
-import Button from './button.svg';
+import Arrow from './arrow.svg';
 
 function CheckButton() {
     return (
-        <img src={Button} alt="Button" />
+        <button className="CheckButton">
+            <img className="CheckButton_arrow" src={Arrow} alt="Arrow" />
+        </button>
     );
 }
 
