@@ -1,12 +1,12 @@
-import './styles.css';
 import Arrow from './arrow.svg';
+import './styles.css';
 
-function CheckButton() {
+function Button() {
     return (
-        <button className="CheckButton">
-            <img className="CheckButton_arrow" src={Arrow} alt="Arrow" />
+        <button className="button">
+            <img className="button_arrow" src={Arrow} alt="Arrow" />
         </button>
     );
 }
 
-export default CheckButton;
+export default Button;

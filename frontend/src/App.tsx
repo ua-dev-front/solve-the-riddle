@@ -1,6 +1,5 @@
-import Riddles from './Riddles'
 import MenuBar from './MenuBar';
-import CheckButton from "./CheckButton";
+import Riddles from './Riddles';
 import './App.css'
 
 function App() {
