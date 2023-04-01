@@ -1,11 +1,41 @@
 .button {
+    position: relative;
     width: 23px;
     height: 23px;
     border: 1px solid #945D0B;
     border-radius: 2px;
 }
 
-.button_arrow {
+.button_img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.button_loading {
+    background-color: rgba(255, 255, 255, 0);
+    border-color: rgba(255, 255, 255, 0);
+    pointer-events: none;
+}
+
+.button-unavailable {
     position: relative;
-    margin: auto;
+    width: 23px;
+    height: 23px;
+    border: 1px solid rgba(148, 93, 11, 0.25);
+    border-radius: 2px;
+    pointer-events: none;
+}
+
+.button_image-unavailable {
+    opacity: 0.2;
+}
+
+button:hover {
+    background: rgba(52, 107, 190, 0.15);
+}
+
+button:active {
+    background: rgba(52, 107, 190, 0.3);
 }
