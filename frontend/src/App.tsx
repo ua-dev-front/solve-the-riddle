@@ -1,9 +1,14 @@
 import MenuBar from './MenuBar';
 import Riddles from './Riddles';
-import Button from './CheckButton'
+import CheckButton from './CheckButton'
 import './App.css'
 
 function App() {
+
+    async function verify() {
+        console.log('clicked')
+    }
+
     return (
       <div className="app">
           <MenuBar />
@@ -11,7 +16,7 @@ function App() {
               'creationDate': new Date(2023, 11, 15)},
           {'riddle': 'I follow you all the time and copy your every move, but you can’t touch me or catch me. ' +
                   'What am I?', 'id': 2, 'creationDate': new Date(2023, 11, 14)}]}/>
-          <Button />
+          <CheckButton onClick = {verify} />
       </div>
   );
 }

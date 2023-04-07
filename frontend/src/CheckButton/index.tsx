@@ -1,24 +1,14 @@
-import { useState } from 'react';
 import Arrow from './arrow.svg';
-import Preloader from './preloader.svg';
 import './styles.css';
 
-function Button() {
-    const [isLoading, setIsLoading] = useState(false);
+interface Props {
+    onClick: () => void;
+}
 
-    async function verify() {
-        setIsLoading(true);
-        // ...
-        setIsLoading(false);
-    }
-
+function Button({onClick}: Props) {
     return (
-        <button className={`button ${isLoading ? 'button_loading' : ''}`} onClick={() => verify()}>
-            {isLoading ? (
-                <img className="button_img" src={Preloader} alt="Loading..."/>
-            ) : (
-                <img className="button_img" src={Arrow} alt="Go" />
-            )}
+        <button className="button">
+            <img className="button_img" src={Arrow} alt="Go" onClick={onClick} />
         </button>
     );
 }
