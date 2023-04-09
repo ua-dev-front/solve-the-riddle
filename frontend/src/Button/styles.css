@@ -1,0 +1,25 @@
+button {
+    position: relative;
+    width: 23px;
+    height: 23px;
+    border: 1px solid #945D0B;
+    border-radius: 2px;
+    cursor: grab;
+}
+
+.button_img {
+    margin: 0 auto;
+}
+
+.button-unavailable {
+    opacity: 0.2;
+    cursor: not-allowed;
+}
+
+button:hover {
+    background: rgba(52, 107, 190, 0.15);
+}
+
+button:active {
+    background: rgba(52, 107, 190, 0.3);
+}

@@ -1,6 +1,6 @@
 import MenuBar from './MenuBar';
 import Riddles from './Riddles';
-import CheckButton from './CheckButton'
+import Button from './Button'
 import './App.css'
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
               'creationDate': new Date(2023, 11, 15)},
           {'riddle': 'I follow you all the time and copy your every move, but you can’t touch me or catch me. ' +
                   'What am I?', 'id': 2, 'creationDate': new Date(2023, 11, 14)}]}/>
-          <CheckButton onClick = {verify} />
+          <Button onClick = {verify} disabled = {false} />
       </div>
   );
 }
