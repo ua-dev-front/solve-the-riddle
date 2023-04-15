@@ -1,7 +1,8 @@
 import MenuBar from './MenuBar';
 import Riddles from './Riddles';
-import Button from './Button'
-import './App.css'
+import Button from './Button';
+import Input from './Input';
+import './App.css';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           {'riddle': 'I follow you all the time and copy your every move, but you can’t touch me or catch me. ' +
                   'What am I?', 'id': 2, 'creationDate': new Date(2023, 11, 14)}]}/>
           <Button onClick = {verify} disabled = {false} />
+          <Input />
       </div>
   );
 }

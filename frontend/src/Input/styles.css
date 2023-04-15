@@ -1,0 +1,11 @@
+input {
+    position: relative;
+    width: 180px;
+    height: 23px;
+    border: 1px solid #346BBE;
+    border-radius: 2px;
+    font-family: 'Courgette', cursive;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+}
