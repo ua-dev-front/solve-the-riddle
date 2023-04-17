@@ -1,12 +1,13 @@
+import {ChangeEvent} from 'react';
 import './styles.css';
 
 export type Props = {
-    answer?: string;
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
-function Input({answer}: Props) {
+function Input({onChange}: Props) {
     return (
-        <input type='text' name='answer' defaultValue={answer}/>
+        <input type='text' name='answer' onChange={onChange}/>
     );
 }
 
