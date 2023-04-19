@@ -7,7 +7,7 @@ export type Props = {
 
 function Input({onChange}: Props) {
     return (
-        <input type='text' name='answer' onChange={onChange}/>
+        <input className="input_answer" type='text' name='answer' onChange={onChange}/>
     );
 }
 
