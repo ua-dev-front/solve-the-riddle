@@ -1,4 +1,4 @@
-.input_answer {
+.input {
     position: relative;
     width: 180px;
     height: 23px;
@@ -10,6 +10,7 @@
     font-size: 13px;
 }
 
-.input_answer:focus {
-    outline-color: #346BBE;
+.input:focus {
+    outline: none;
+    border-color: #346BBE;
 }

@@ -1,13 +1,23 @@
-import {ChangeEvent} from 'react';
+import { useState } from "react";
 import './styles.css';
 
 export type Props = {
-    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+    inputValue?: string;
+    onChange?: (value: string) => void;
 };
 
-function Input({onChange}: Props) {
+function Input({ inputValue, onChange }: Props) {
+    const [value, setValue] = useState(inputValue || "");
+
     return (
-        <input className="input_answer" type='text' name='answer' onChange={onChange}/>
+        <input
+            className="input" type="text" name="answer" value={value} onChange={(event) => {
+                if (onChange) {
+                    onChange(event.target.value);
+                    setValue(event.target.value);
+                }
+            }}
+        />
     );
 }
 
