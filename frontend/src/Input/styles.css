@@ -8,6 +8,7 @@
     font-style: normal;
     font-weight: 400;
     font-size: 13px;
+    padding: 0 7px;
 }
 
 .input:focus {
