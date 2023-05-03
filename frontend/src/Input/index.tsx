@@ -9,9 +9,7 @@ function Input({ value, onChange }: Props) {
     return (
         <input
             className="input" type="text" name="answer" value={value}
-            onChange={(event) => {
-                onChange?.(event.target.value)
-            }}
+            onChange={(event) => onChange?.(event.target.value)}
         />
     );
 }

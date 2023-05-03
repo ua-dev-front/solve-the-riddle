@@ -9,6 +9,7 @@
     font-weight: 400;
     font-size: 13px;
     padding: 0 7px;
+    box-sizing: border-box;
 }
 
 .input:focus {
