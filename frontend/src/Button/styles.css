@@ -1,4 +1,4 @@
-button {
+.button {
     position: relative;
     width: 23px;
     height: 23px;
@@ -16,10 +16,10 @@ button {
     cursor: not-allowed;
 }
 
-button:hover {
+.button:hover {
     background: rgba(52, 107, 190, 0.15);
 }
 
-button:active {
+.button:active {
     background: rgba(52, 107, 190, 0.3);
 }
