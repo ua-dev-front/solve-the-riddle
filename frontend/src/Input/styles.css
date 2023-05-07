@@ -1,0 +1,18 @@
+.input {
+    position: relative;
+    width: 180px;
+    height: 23px;
+    border: 1px solid #945D0B;
+    border-radius: 2px;
+    font-family: 'Courgette', cursive;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    padding: 0 7px;
+    box-sizing: border-box;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #346BBE;
+}
