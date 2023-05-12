@@ -3,18 +3,17 @@ import MenuBar from './MenuBar';
 import Riddles from './Riddles';
 import Button from './Button';
 import Input from './Input';
-import DropdownContentButton from './DropdownContentButton';
+import ExpanderButton from './ExpanderButton';
 import './App.css';
 
 function App() {
     const [answer, setAnswer] = useState('');
+    const [isContentOpen, setIsContentOpen] = useState(false);
+
+    const buttonText = isContentOpen ? ['hide answer', 'ah, forget it!']: ['view answer', 'take a guess'];
 
     async function verify() {
         console.log('clicked');
-    }
-
-    async function openContent() {
-        console.log('clicked2');
     }
 
     return (
@@ -26,7 +25,8 @@ function App() {
                   'What am I?', 'id': 2, 'creationDate': new Date(2023, 11, 14)}]}/>
           <Button onClick = {verify} disabled = {false} />
           <Input value={answer} onChange = {(newAnswer) => setAnswer(newAnswer)} />
-          <DropdownContentButton onClick = {openContent} answer={false} />
+          <ExpanderButton text = {buttonText} isContentOpen={isContentOpen}
+                          onClick = {(isContentOpen) => setIsContentOpen(isContentOpen)} answer={false} />
       </div>
   );
 }

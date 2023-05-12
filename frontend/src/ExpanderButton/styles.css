@@ -1,4 +1,4 @@
-.guessTaker {
+.expanderButton {
     position: relative;
     width: auto;
     height: 23px;
@@ -13,9 +13,21 @@
     text-decoration-line: underline;
     color: #945D0B;
     cursor: pointer;
+    border-radius: 4px;
 }
 
-.guessTaker-img {
+.expanderButton-up {
     padding-left: 5px;
-    margin: 0 auto;
+}
+
+.expanderButton-down {
+    transform: rotate(180deg) translateX(-5px);
+}
+
+.expanderButton:hover {
+    background: rgba(52, 107, 190, 0.15);
+}
+
+.expanderButton:active {
+    background: rgba(52, 107, 190, 0.3);
 }
