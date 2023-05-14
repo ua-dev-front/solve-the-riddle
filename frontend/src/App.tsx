@@ -8,9 +8,9 @@ import './App.css';
 
 function App() {
     const [answer, setAnswer] = useState('');
-    const [isContentOpen, setIsContentOpen] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(false);
 
-    const buttonText = isContentOpen ? ['hide answer', 'ah, forget it!']: ['view answer', 'take a guess'];
+    const buttonText = isExpanded ? 'ah, forget it!': 'take a guess';
 
     async function verify() {
         console.log('clicked');
@@ -25,8 +25,8 @@ function App() {
                   'What am I?', 'id': 2, 'creationDate': new Date(2023, 11, 14)}]}/>
           <Button onClick = {verify} disabled = {false} />
           <Input value={answer} onChange = {(newAnswer) => setAnswer(newAnswer)} />
-          <ExpanderButton text = {buttonText} isContentOpen={isContentOpen}
-                          onClick = {(isContentOpen) => setIsContentOpen(isContentOpen)} answer={false} />
+          <ExpanderButton text = {buttonText} isExpanded={isExpanded}
+                          onClick = {(isExpanded) => setIsExpanded(isExpanded)} />
       </div>
   );
 }

@@ -9,19 +9,19 @@
     font-weight: 300;
     font-size: 13px;
     line-height: 16px;
-    text-align: right;
     text-decoration-line: underline;
     color: #945D0B;
     cursor: pointer;
     border-radius: 4px;
 }
 
-.expanderButton-up {
+.expanderButton_img {
     padding-left: 5px;
+    display: inline-block;
 }
 
-.expanderButton-down {
-    transform: rotate(180deg) translateX(-5px);
+.expanderButton_img-down {
+    transform: rotate(180deg);
 }
 
 .expanderButton:hover {

@@ -3,19 +3,20 @@ import './styles.css';
 
 
 interface Props {
-    onClick?: (isContentOpen: boolean) => void;
-    isContentOpen: boolean;
-    answer?: boolean;
-    text: string[];
+    onClick?: (isExpanded: boolean) => void;
+    isExpanded: boolean;
+    text: string;
 }
 
-function ExpanderButton({text, onClick, answer, isContentOpen}: Props) {
-    const arrow = isContentOpen ? 'up' : 'down';
-    const buttonText = answer ? text[0]: text[1];
+function ExpanderButton({text, onClick, isExpanded}: Props) {
+    const arrow = isExpanded ? 'up' : 'down';
 
     return (
-        <button className="expanderButton" onClick={() => onClick?.(!isContentOpen)} >
-            {buttonText}<img className={`expanderButton-${arrow}`} src={Arrow} alt="Go" />
+        <button className="expanderButton" onClick={() => onClick?.(!isExpanded)} >
+            {text}
+            <div className="expanderButton_img">
+                <img className={`expanderButton_img-${arrow}`} src={Arrow} alt="Go" />
+            </div>
         </button>
     );
 }
