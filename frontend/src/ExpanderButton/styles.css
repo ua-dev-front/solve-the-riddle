@@ -16,11 +16,11 @@
 }
 
 .expanderButton_img {
-    padding-left: 5px;
-    display: inline-block;
+    margin-left: 5px;
+    transition: transform 0.4s ease-in-out;
 }
 
-.expanderButton_img-down {
+.expanderButton_img--down {
     transform: rotate(180deg);
 }
 
