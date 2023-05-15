@@ -12,7 +12,7 @@ function ExpanderButton({ text, onClick, isExpanded }: Props) {
 
     return (
         <button className="expanderButton" onClick={() => onClick?.(!isExpanded)}>
-            {text}<img className={`expanderButton_img expanderButton_img--${arrow}`} src={Arrow} alt="Go" />
+            {text}<img className={`expanderButton_img expanderButton_img-${arrow}`} src={Arrow} alt="Go" />
         </button>
     );
 }

@@ -20,12 +20,13 @@
     transition: transform 0.4s ease-in-out;
 }
 
-.expanderButton_img--down {
+.expanderButton_img-down {
     transform: rotate(180deg);
 }
 
 .expanderButton:hover {
     background: rgba(52, 107, 190, 0.15);
+    transition: background-color 0.3s ease-in-out;
 }
 
 .expanderButton:active {
