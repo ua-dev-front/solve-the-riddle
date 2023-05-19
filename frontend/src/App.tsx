@@ -1,9 +1,9 @@
 import {useState} from "react";
 import MenuBar from './MenuBar';
 import Riddles from './Riddles';
-import Button from './Button';
 import Input from './Input';
 import ExpanderButton from './ExpanderButton';
+import AnswerIndicator from "./AnswerIndicator";
 import './App.css';
 
 function App() {
@@ -23,10 +23,10 @@ function App() {
               'creationDate': new Date(2023, 11, 15)},
           {'riddle': 'I follow you all the time and copy your every move, but you can’t touch me or catch me. ' +
                   'What am I?', 'id': 2, 'creationDate': new Date(2023, 11, 14)}]}/>
-          <Button onClick = {verify} disabled = {false} />
           <Input value={answer} onChange = {(newAnswer) => setAnswer(newAnswer)} />
           <ExpanderButton text = {buttonText} isExpanded={isExpanded}
                           onClick = {(isExpanded) => setIsExpanded(isExpanded)} />
+          <AnswerIndicator indicator = {'Checkmark'} />
       </div>
   );
 }
