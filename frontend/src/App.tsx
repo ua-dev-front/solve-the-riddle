@@ -3,7 +3,7 @@ import MenuBar from './MenuBar';
 import Riddles from './Riddles';
 import Input from './Input';
 import ExpanderButton from './ExpanderButton';
-import AnswerIndicator from "./AnswerIndicator";
+import AnswerIndicator, {IndicatorType} from './AnswerIndicator';
 import './App.css';
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
           <Input value={answer} onChange = {(newAnswer) => setAnswer(newAnswer)} />
           <ExpanderButton text = {buttonText} isExpanded={isExpanded}
                           onClick = {(isExpanded) => setIsExpanded(isExpanded)} />
-          <AnswerIndicator indicator = {'Checkmark'} />
+          <AnswerIndicator indicator = {IndicatorType.Preloader} />
       </div>
   );
 }
