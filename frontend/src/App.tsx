@@ -27,6 +27,8 @@ function App() {
           <ExpanderButton text = {buttonText} isExpanded={isExpanded}
                           onClick = {(isExpanded) => setIsExpanded(isExpanded)} />
           <AnswerIndicator indicator = {IndicatorType.Preloader} />
+          <AnswerIndicator indicator = {IndicatorType.Button} onClick={verify} disabled={false} />
+
       </div>
   );
 }

@@ -1,5 +1,12 @@
-.answerIndicator-img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.answer-indicator {
+    position: relative;
+    width: 23px;
+    height: 23px;
+}
+
+.answer-indicator_img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

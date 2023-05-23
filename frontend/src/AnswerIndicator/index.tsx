@@ -23,18 +23,22 @@ interface ButtonProps {
 type Props = BaseProps & ButtonProps;
 
 function AnswerIndicator({ indicator, onClick, disabled }: Props) {
-    if (indicator === IndicatorType.Button) {
-        return <Button onClick={onClick} disabled={disabled} />;
-    } else {
+    const imgIndicator = {
+        [IndicatorType.Checkmark]: [Checkmark, 'Correct'],
+        [IndicatorType.Cross]: [Cross, 'Incorrect'],
+        [IndicatorType.Preloader]: [Preloader, '...Loading'],
+    };
 
-        const imgIndicator = {
-            [IndicatorType.Checkmark]: [Checkmark, 'Correct'],
-            [IndicatorType.Cross]: [Cross, 'Incorrect'],
-            [IndicatorType.Preloader]: [Preloader, '...Loading'],
-        };
+    return (
+        <div className="answer-indicator">
+            {indicator === IndicatorType.Button ? (
+                <Button onClick={onClick} disabled={disabled} />
+            ) : (
+                <img className="answer-indicator_img" src={imgIndicator[indicator][0]} alt={imgIndicator[indicator][1]} />
+            )}
+        </div>
+    )
 
-        return <img className="answerIndicator-img" src={imgIndicator[indicator][0]} alt={imgIndicator[indicator][1]} />;
-    }
 }
 
 export default AnswerIndicator;
