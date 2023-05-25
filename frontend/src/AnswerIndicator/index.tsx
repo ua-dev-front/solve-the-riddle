@@ -26,7 +26,7 @@ function AnswerIndicator({ indicator, onClick, disabled }: Props) {
     const imgIndicator = {
         [IndicatorType.Checkmark]: [Checkmark, 'Correct'],
         [IndicatorType.Cross]: [Cross, 'Incorrect'],
-        [IndicatorType.Preloader]: [Preloader, '...Loading'],
+        [IndicatorType.Preloader]: [Preloader, 'Loading...'],
     };
 
     return (
@@ -34,7 +34,7 @@ function AnswerIndicator({ indicator, onClick, disabled }: Props) {
             {indicator === IndicatorType.Button ? (
                 <Button onClick={onClick} disabled={disabled} />
             ) : (
-                <img className="answer-indicator_img" src={imgIndicator[indicator][0]} alt={imgIndicator[indicator][1]} />
+                <img src={imgIndicator[indicator][0]} alt={imgIndicator[indicator][1]} />
             )}
         </div>
     )

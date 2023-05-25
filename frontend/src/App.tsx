@@ -9,11 +9,20 @@ import './App.css';
 function App() {
     const [answer, setAnswer] = useState('');
     const [isExpanded, setIsExpanded] = useState(false);
+    const [indicatorType, setIndicatorType] = useState(IndicatorType.Button);
 
-    const buttonText = isExpanded ? 'ah, forget it!': 'take a guess';
+    const buttonText = isExpanded ? 'ah, forget it!' : 'take a guess';
 
     async function verify() {
         console.log('clicked');
+    }
+
+    function toggleIndicatorType() {
+        setIndicatorType((type) => {
+            return type === IndicatorType.Button
+                ? IndicatorType.Preloader
+                : IndicatorType.Button;
+        });
     }
 
     return (
@@ -26,8 +35,12 @@ function App() {
           <Input value={answer} onChange = {(newAnswer) => setAnswer(newAnswer)} />
           <ExpanderButton text = {buttonText} isExpanded={isExpanded}
                           onClick = {(isExpanded) => setIsExpanded(isExpanded)} />
-          <AnswerIndicator indicator = {IndicatorType.Preloader} />
-          <AnswerIndicator indicator = {IndicatorType.Button} onClick={verify} disabled={false} />
+          <AnswerIndicator
+              indicator={indicatorType}
+              onClick={verify}
+              disabled={false}
+          />
+          <button onClick={toggleIndicatorType}>Change indicator</button>
 
       </div>
   );
