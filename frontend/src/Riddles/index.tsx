@@ -13,7 +13,7 @@ function Riddles({riddles}: Props) {
     return (
         <div className="riddles">
             {riddles.map(({riddle, id, creationDate}) => (<Riddle riddle={riddle} id={id}
-                                              creationDate={creationDate} key={id} />))}
+                                                                  creationDate={creationDate} key={id} />))}
         </div>
     );
 }
