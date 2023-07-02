@@ -1,19 +1,25 @@
+import {useEffect, useState} from "react";
 import Riddle from '../Riddle';
 import './styles.css';
 
-export type Props = {
-    riddles: {
-        riddle: string,
-        id: number,
-        creationDate: Date
-    }[]
-};
+const localURL = 'http://127.0.0.1:5000/';
 
-function Riddles({riddles}: Props) {
+function Riddles() {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        async function getData() {
+            const response = await fetch(localURL);
+            let actualData = await response.json();
+            setData(actualData['riddles']);
+        }
+        getData();
+    }, []);
+
     return (
         <div className="riddles">
-            {riddles.map(({riddle, id, creationDate}) => (<Riddle riddle={riddle} id={id}
-                                                                  creationDate={creationDate} key={id} />))}
+            {data.map((riddle) => (<Riddle riddle={riddle['riddle']} id={riddle['id']} key={riddle['id']}
+                                           creationDate={riddle['creationDate']}/>))}
         </div>
     );
 }
