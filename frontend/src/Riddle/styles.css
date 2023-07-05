@@ -51,6 +51,7 @@
   opacity: 1;
   height: auto;
   transition-delay: 0.1s;
+  padding: 10px 0;
 }
 
 .riddle_answerBlock::before {
