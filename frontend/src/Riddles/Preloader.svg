@@ -1,0 +1,13 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path id="circle" d="M2 32V32C2 15.4315 15.4315 2 32 2V2C48.5685 2 62 15.4315 62 32V32C62 48.5685 48.5685 62 32 62V62" stroke="#945D0B" stroke-width="3" stroke-linecap="round">
+        <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="rotate"
+                from="0 32 32"
+                to="360 32 32"
+                dur="5s"
+                repeatCount="indefinite"
+        />
+    </path>
+</svg>
