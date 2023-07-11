@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
-import Riddle from '../Riddle';
+import Riddle, {RiddleProps} from '../Riddle';
 import Preloader from './Preloader.svg';
 import './styles.css';
 
-const localURL = 'http://127.0.0.1:5000/';
-
 function Riddles() {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<RiddleProps[] | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function getData() {
-            const response = await fetch(localURL);
-            let actualData = await response.json();
+            const response = await fetch(`${process.env.REACT_APP_UNSPLASH_KEY}`);
+            const actualData = await response.json();
             setData(actualData['riddles']);
             setLoading(false);
         }
@@ -22,11 +20,18 @@ function Riddles() {
     return (
         <div className="riddles">
             {loading ? (
-                <img src={Preloader} alt={"Loading..."} className="riddles_preloader" />
+                <div className="riddles_preloader">
+                    <img src={Preloader} alt="Loading..." />
+                </div>
             ) : (
-                data.map((riddle) => (
-                    <Riddle riddle={riddle['riddle']} id={riddle['id']} key={riddle['id']}
-                            creationDate={riddle['creationDate']}/>
+                data !== null &&
+                data.map(({ riddle, id, creationDate }: RiddleProps) => (
+                    <Riddle
+                        riddle={riddle}
+                        id={id}
+                        key={id}
+                        creationDate={creationDate}
+                    />
                 ))
             )}
         </div>

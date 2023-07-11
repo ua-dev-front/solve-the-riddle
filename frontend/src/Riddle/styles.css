@@ -30,7 +30,7 @@
 
 .riddle_expander {
   position: absolute;
-  margin-left: calc(100% - 110px);
+  right: 10px;
 }
 
 .riddle_answerBlock {
@@ -44,7 +44,7 @@
   opacity: 0;
   height: 0;
   visibility: hidden;
-  transition: opacity 0.2s ease, height 0.3s ease-out, visibility 0s linear 0.3s;;
+  transition: opacity 0.2s ease, height 0.3s ease-out, visibility 0s linear 0.3s;
 }
 
 .riddle_answerBlock.expanded {
@@ -59,7 +59,6 @@
   content: '';
   position: absolute;
   top: 0;
-  left: 2%;
   width: 95%;
   height: 1px;
   border-bottom: 1px dashed;

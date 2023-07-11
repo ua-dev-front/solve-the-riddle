@@ -1,10 +1,8 @@
-import { useState, useEffect } from 'react';
-import AnswerIndicator, { IndicatorType } from '../AnswerIndicator';
+import {useEffect, useState} from 'react';
+import AnswerIndicator, {IndicatorType} from '../AnswerIndicator';
 import ExpanderButton from '../ExpanderButton';
 import Input from '../Input';
 import './styles.css';
-
-const localURL = 'http://127.0.0.1:5000/verifyAnswer?';
 
 export type RiddleProps = {
     riddle: string;
@@ -19,13 +17,18 @@ function Riddle({ riddle, id, creationDate }: Props) {
     const [isExpanded, setIsExpanded] = useState(false);
     const [indicator, setIndicator] = useState(IndicatorType.Button);
     const [answerBlockHeight, setAnswerBlockHeight] = useState(0);
+    const [disabled, setDisabled] = useState(false);
 
-    const buttonText = isExpanded ? 'ah, forget it!' : 'take a guess';
+    const buttonText = isExpanded
+        ? indicator === IndicatorType.Checkmark ? 'hide answer' : 'ah, forget it!'
+        : indicator === IndicatorType.Checkmark ?  'view answer' : 'take a guess';
+
 
     async function verify(id: number) {
         setIndicator(IndicatorType.Preloader);
+        setDisabled(true);
         const initialResponse = await fetch(
-            localURL + new URLSearchParams({
+            `${process.env.REACT_APP_UNSPLASH_KEY}/verifyAnswer?` + new URLSearchParams({
                 id: id.toString(),
                 answer,
             }),
@@ -38,6 +41,7 @@ function Riddle({ riddle, id, creationDate }: Props) {
         );
         const response = await initialResponse.json();
         setIndicator(response['correct'] ? IndicatorType.Checkmark : IndicatorType.Cross);
+        setDisabled(response['correct']);
     }
 
     useEffect(() => {
@@ -61,15 +65,21 @@ function Riddle({ riddle, id, creationDate }: Props) {
             </div>
             <div className={`riddle_answerBlock ${isExpanded ? 'expanded' : ''}`}
                  style={{ height: `${answerBlockHeight}px` }} id={`answerBlock-${id}`}>
-                <Input value={answer}
+                <Input value={answer} disabled={disabled}
                        onChange={(newAnswer) => {
                            setAnswer(newAnswer);
                            if (indicator === IndicatorType.Cross) {
                                setIndicator(IndicatorType.Button);
                            }
                        }}
+                       onKeyPress={(event) => {
+                           if (event.key === "Enter") {
+                               verify(id);
+                           }
+                       }}
                 />
-                <AnswerIndicator indicator={indicator} onClick={() => verify(id)} disabled={answer.length === 0} />
+                <AnswerIndicator indicator={indicator} onClick={() => verify(id)} disabled={answer.length === 0 ||
+                    answer.trim() === ''}/>
             </div>
         </div>
     );
