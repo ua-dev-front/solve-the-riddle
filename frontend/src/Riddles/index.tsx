@@ -1,7 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import Riddle, {RiddleProps} from '../Riddle';
 import Preloader from './Preloader.svg';
 import './styles.css';
+
+interface ResponseData {
+    riddles: RiddleProps[];
+}
 
 function Riddles() {
     const [data, setData] = useState<RiddleProps[] | null>(null);
@@ -9,9 +13,9 @@ function Riddles() {
 
     useEffect(() => {
         async function getData() {
-            const response = await fetch(`${process.env.REACT_APP_UNSPLASH_KEY}`);
-            const actualData = await response.json();
-            setData(actualData['riddles']);
+            const response = await fetch(`${process.env.REACT_APP_URL}`);
+            const actualData: ResponseData = await response.json();
+            setData(actualData.riddles);
             setLoading(false);
         }
         getData();
@@ -21,7 +25,7 @@ function Riddles() {
         <div className="riddles">
             {loading ? (
                 <div className="riddles_preloader">
-                    <img src={Preloader} alt="Loading..." />
+                    <img src={Preloader} alt="Loading..." className="preloader"/>
                 </div>
             ) : (
                 data !== null &&

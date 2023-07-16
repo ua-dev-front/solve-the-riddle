@@ -4,7 +4,7 @@ import Preloader from './Preloader.svg';
 import Button from '../Button';
 import './styles.css';
 
-export enum IndicatorType {
+export enum AnswerStatus {
     Checkmark,
     Cross,
     Preloader,
@@ -12,7 +12,7 @@ export enum IndicatorType {
 }
 
 interface BaseProps {
-    indicator: IndicatorType;
+    indicator: AnswerStatus;
 }
 
 interface ButtonProps {
@@ -24,14 +24,14 @@ type Props = BaseProps & ButtonProps;
 
 function AnswerIndicator({ indicator, onClick, disabled }: Props) {
     const imgIndicator = {
-        [IndicatorType.Checkmark]: [Checkmark, 'Correct'],
-        [IndicatorType.Cross]: [Cross, 'Incorrect'],
-        [IndicatorType.Preloader]: [Preloader, 'Loading...'],
+        [AnswerStatus.Checkmark]: [Checkmark, 'Correct'],
+        [AnswerStatus.Cross]: [Cross, 'Incorrect'],
+        [AnswerStatus.Preloader]: [Preloader, 'Loading...'],
     };
 
     return (
         <div className="answer-indicator">
-            {indicator === IndicatorType.Button ? (
+            {indicator === AnswerStatus.Button ? (
                 <Button onClick={onClick} disabled={disabled} />
             ) : (
                 <img src={imgIndicator[indicator][0]} alt={imgIndicator[indicator][1]} />
