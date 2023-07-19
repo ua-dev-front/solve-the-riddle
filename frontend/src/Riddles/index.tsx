@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Riddle, {RiddleProps} from '../Riddle';
+import Riddle, { RiddleProps } from '../Riddle';
 import Preloader from './Preloader.svg';
 import './styles.css';
 
@@ -25,7 +25,7 @@ function Riddles() {
         <div className="riddles">
             {loading ? (
                 <div className="riddles_preloader">
-                    <img src={Preloader} alt="Loading..." className="preloader"/>
+                    <img src={Preloader} alt="Loading..." />
                 </div>
             ) : (
                 data !== null &&

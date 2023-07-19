@@ -5,40 +5,39 @@ import Button from '../Button';
 import './styles.css';
 
 export enum AnswerStatus {
-    Checkmark,
-    Cross,
-    Preloader,
-    Button
+    Correct,
+    Incorrect,
+    Loading,
+    Unverified
 }
 
 interface BaseProps {
     indicator: AnswerStatus;
 }
 
-interface ButtonProps {
+interface UnverifiedProps {
     onClick?: () => void;
     disabled?: boolean;
 }
 
-type Props = BaseProps & ButtonProps;
+type Props = BaseProps & UnverifiedProps;
 
 function AnswerIndicator({ indicator, onClick, disabled }: Props) {
     const imgIndicator = {
-        [AnswerStatus.Checkmark]: [Checkmark, 'Correct'],
-        [AnswerStatus.Cross]: [Cross, 'Incorrect'],
-        [AnswerStatus.Preloader]: [Preloader, 'Loading...'],
+        [AnswerStatus.Correct]: [Checkmark, 'Correct'],
+        [AnswerStatus.Incorrect]: [Cross, 'Incorrect'],
+        [AnswerStatus.Loading]: [Preloader, 'Loading...'],
     };
 
     return (
         <div className="answer-indicator">
-            {indicator === AnswerStatus.Button ? (
+            {indicator === AnswerStatus.Unverified ? (
                 <Button onClick={onClick} disabled={disabled} />
             ) : (
                 <img src={imgIndicator[indicator][0]} alt={imgIndicator[indicator][1]} />
             )}
         </div>
     )
-
 }
 
 export default AnswerIndicator;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import AnswerIndicator, {AnswerStatus} from '../AnswerIndicator';
+import AnswerIndicator, { AnswerStatus } from '../AnswerIndicator';
 import ExpanderButton from '../ExpanderButton';
 import Input from '../Input';
 import './styles.css';
@@ -17,23 +17,19 @@ export type RiddleProps = {
 function Riddle({ riddle, id, creationDate }: RiddleProps) {
     const [answer, setAnswer] = useState('');
     const [isExpanded, setIsExpanded] = useState(false);
-    const [indicator, setIndicator] = useState(AnswerStatus.Button);
+    const [indicator, setIndicator] = useState(AnswerStatus.Unverified);
     const [answerBlockHeight, setAnswerBlockHeight] = useState(0);
     const [disabled, setDisabled] = useState(false);
 
     let buttonText;
-    switch (indicator) {
-        case AnswerStatus.Checkmark:
-            buttonText = isExpanded ? 'hide answer' : 'view answer';
-            break;
-        default:
-            buttonText = isExpanded ? 'ah, forget it!' : 'take a guess';
-            break;
+    if (indicator === AnswerStatus.Correct) {
+        buttonText = isExpanded ? 'hide answer' : 'view answer';
+    } else {
+        buttonText = isExpanded ? 'ah, forget it!' : 'take a guess';
     }
 
-
     async function verify(id: number) {
-        setIndicator(AnswerStatus.Preloader);
+        setIndicator(AnswerStatus.Loading);
         setDisabled(true);
         const initialResponse = await fetch(
             `${process.env.REACT_APP_URL}/verifyAnswer?` + new URLSearchParams({
@@ -48,8 +44,12 @@ function Riddle({ riddle, id, creationDate }: RiddleProps) {
             }
         );
         const response: ResponseData = await initialResponse.json();
-        setIndicator(response.correct ? AnswerStatus.Checkmark : AnswerStatus.Cross);
+        setIndicator(response.correct ? AnswerStatus.Correct : AnswerStatus.Incorrect);
         setDisabled(response.correct);
+    }
+
+    function isAnswerValid() {
+        return answer.trim() !== '';
     }
 
     useEffect(() => {
@@ -76,17 +76,17 @@ function Riddle({ riddle, id, creationDate }: RiddleProps) {
                 <Input value={answer} disabled={disabled}
                        onChange={(newAnswer) => {
                            setAnswer(newAnswer);
-                           if (indicator === AnswerStatus.Cross) {
-                               setIndicator(AnswerStatus.Button);
+                           if (indicator === AnswerStatus.Incorrect) {
+                               setIndicator(AnswerStatus.Unverified);
                            }
                        }}
                        onKeyPress={(event) => {
-                           if (event.key === 'Enter' && answer.trim() !== '') {
+                           if (event.key === 'Enter' && isAnswerValid()) {
                                verify(id);
                            }
                        }}
                 />
-                <AnswerIndicator indicator={indicator} onClick={() => verify(id)} disabled={answer.trim() === ''}/>
+                <AnswerIndicator indicator={indicator} onClick={() => verify(id)} disabled={!isAnswerValid()}/>
             </div>
         </div>
     );
