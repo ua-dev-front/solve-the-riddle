@@ -48,8 +48,8 @@ function Riddle({ riddle, id, creationDate }: RiddleProps) {
         setDisabled(response.correct);
     }
 
-    function isAnswerValid() {
-        return answer.trim() !== '';
+    function isAnswerBlank() {
+        return answer.trim() === '';
     }
 
     useEffect(() => {
@@ -81,12 +81,12 @@ function Riddle({ riddle, id, creationDate }: RiddleProps) {
                            }
                        }}
                        onKeyPress={(event) => {
-                           if (event.key === 'Enter' && isAnswerValid()) {
+                           if (event.key === 'Enter' && !isAnswerBlank()) {
                                verify(id);
                            }
                        }}
                 />
-                <AnswerIndicator indicator={indicator} onClick={() => verify(id)} disabled={!isAnswerValid()}/>
+                <AnswerIndicator indicator={indicator} onClick={() => verify(id)} disabled={isAnswerBlank()}/>
             </div>
         </div>
     );

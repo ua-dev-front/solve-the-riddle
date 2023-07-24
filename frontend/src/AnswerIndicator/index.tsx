@@ -15,12 +15,12 @@ interface BaseProps {
     indicator: AnswerStatus;
 }
 
-interface UnverifiedProps {
+interface ButtonProps {
     onClick?: () => void;
     disabled?: boolean;
 }
 
-type Props = BaseProps & UnverifiedProps;
+type Props = BaseProps & ButtonProps;
 
 function AnswerIndicator({ indicator, onClick, disabled }: Props) {
     const imgIndicator = {

@@ -1,11 +1,15 @@
-body,
-html {
+html, body {
+    height: 100%;
     margin: 0;
+}
+
+#root {
+    height: 100%;
 }
 
 .app {
     min-width: 320px;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
 }
