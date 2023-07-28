@@ -12,7 +12,47 @@
   align-items: center;
   background: linear-gradient(90deg, #f7f7f7 0%, rgba(246, 246, 246, 1) 100%);
   border-radius: 20px;
-  transition: border-radius 0.3s ease;
+  transition: border-radius 0.3s ease, background-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.incorrect .riddle_block::after,
+.incorrect .riddle_answerBlock::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(190, 52, 107, 0.25) 0%, rgba(190, 52, 107, 0.1) 100%);
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.correct .riddle_block::after,
+.correct .riddle_answerBlock::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(107, 190, 52, 0.25) 0%, rgba(107, 190, 52, 0.1) 100%);
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.incorrect .riddle_answerBlock::after,
+.correct .riddle_answerBlock::after {
+  border-radius: 0 0 20px 20px;;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    pointer-events: none;
+  }
 }
 
 .expanded .riddle_block {

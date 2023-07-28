@@ -57,8 +57,12 @@ function Riddle({ riddle, id, creationDate }: RiddleProps) {
             : 0);
     }, [isExpanded, id]);
 
+    const riddleClassName = `${isExpanded ? 'expanded' : ''} ${
+        indicator === AnswerStatus.Correct ? 'correct' : indicator === AnswerStatus.Incorrect ? 'incorrect' : ''
+    }`;
+
     return (
-        <div className={`riddle ${isExpanded ? 'expanded' : ''}`}>
+        <div className={`riddle ${riddleClassName}`}>
             <div className="riddle_date">#{id}, {new Date(creationDate).toLocaleDateString()}</div>
             <div className={`riddle_block ${isExpanded ? 'expanded' : ''}`}>
                 <div className="riddle_text">{riddle}</div>
