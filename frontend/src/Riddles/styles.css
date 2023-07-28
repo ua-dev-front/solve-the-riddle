@@ -1,11 +1,17 @@
 .riddles {
-  margin: auto;
-  width: min(90%, 560px);
-  position: relative;
+    margin: auto;
+    width: min(90%, 560px);
+    position: relative;
+}
+
+.riddles_preloader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media screen and (max-width: 632px) {
-  .riddles {
-    width: calc(100% - 72px);
-  }
+    .riddles {
+        width: calc(100% - 72px);
+    }
 }

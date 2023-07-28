@@ -8,8 +8,15 @@
 }
 
 .riddle_block {
-  background: linear-gradient(90deg, #F7F7F7 0%, rgba(246, 246, 246, 1) 100%);
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, #f7f7f7 0%, rgba(246, 246, 246, 1) 100%);
   border-radius: 20px;
+  transition: border-radius 0.3s ease;
+}
+
+.expanded .riddle_block {
+  border-radius: 20px 20px 0 0;
 }
 
 .riddle_text {
@@ -19,4 +26,45 @@
   font-size: 14px;
   position: relative;
   width: 68%;
+}
+
+.riddle_expander {
+  position: absolute;
+  right: 10px;
+}
+
+.riddle_answerBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0 10px 0;
+  border-radius: 0 0 20px 20px;
+  background: linear-gradient(90deg, #f7f7f7 0%, rgba(246, 246, 246, 1) 100%);
+  position: relative;
+  opacity: 0;
+  height: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, height 0.3s ease-out, visibility 0s linear 0.3s;
+}
+
+.riddle_answerBlock.expanded {
+  visibility: visible;
+  opacity: 1;
+  height: auto;
+  transition-delay: 0.1s;
+  padding: 10px 0;
+}
+
+.riddle_answerBlock::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 95%;
+  height: 1px;
+  border-bottom: 1px dashed;
+  opacity: 0.2;
+}
+
+.riddle_answerBlock Input + div {
+  margin-left: 5px;
 }

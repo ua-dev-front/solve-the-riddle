@@ -1,19 +1,43 @@
-import Riddle from '../Riddle';
+import { useEffect, useState } from 'react';
+import Riddle, { RiddleProps } from '../Riddle';
+import Preloader from './Preloader.svg';
 import './styles.css';
 
-export type Props = {
-    riddles: {
-        riddle: string,
-        id: number,
-        creationDate: Date
-    }[]
-};
+interface ResponseData {
+    riddles: RiddleProps[];
+}
 
-function Riddles({riddles}: Props) {
+function Riddles() {
+    const [data, setData] = useState<RiddleProps[] | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function getData() {
+            const response = await fetch(`${process.env.REACT_APP_URL}`);
+            const actualData: ResponseData = await response.json();
+            setData(actualData.riddles);
+            setLoading(false);
+        }
+        getData();
+    }, []);
+
     return (
         <div className="riddles">
-            {riddles.map(({riddle, id, creationDate}) => (<Riddle riddle={riddle} id={id}
-                                              creationDate={creationDate} key={id} />))}
+            {loading ? (
+                <div className="riddles_preloader">
+                    <img src={Preloader} alt="Loading..." />
+                </div>
+            ) : (
+                data !== null &&
+                data.map(({ riddle, id, creationDate }: RiddleProps) => (
+                    <Riddle
+                        riddle={riddle}
+                        id={id}
+                        key={id}
+                        creationDate={creationDate}
+                    />
+                ))
+            )}
         </div>
     );
 }

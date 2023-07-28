@@ -16,10 +16,11 @@
     cursor: not-allowed;
 }
 
-.button:hover {
+.button:hover:not(.button-disabled) {
     background: rgba(52, 107, 190, 0.15);
 }
 
-.button:active {
+.button:active:not(.button-disabled) {
     background: rgba(52, 107, 190, 0.3);
 }
+
