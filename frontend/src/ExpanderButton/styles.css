@@ -1,7 +1,9 @@
 .expanderButton {
+    display: inline-flex;
+    align-items: stretch;
     position: relative;
     width: auto;
-    height: 23px;
+    height: auto;
     background-color: transparent;
     border: none;
     font-family: 'Inter', serif;

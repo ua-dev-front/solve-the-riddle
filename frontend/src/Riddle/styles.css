@@ -68,3 +68,9 @@
 .riddle_answerBlock Input + div {
   margin-left: 5px;
 }
+
+@media screen and (max-width: 500px) {
+  .riddle_expander {
+    position: relative;
+  }
+}
