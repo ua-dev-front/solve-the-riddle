@@ -29,8 +29,9 @@
 }
 
 .riddle_expander {
-  position: absolute;
-  right: 10px;
+  position: relative;
+  margin-left: auto;
+  padding-right: 10px;
 }
 
 .riddle_answerBlock {
@@ -67,10 +68,4 @@
 
 .riddle_answerBlock Input + div {
   margin-left: 5px;
-}
-
-@media screen and (max-width: 500px) {
-  .riddle_expander {
-    position: relative;
-  }
 }
