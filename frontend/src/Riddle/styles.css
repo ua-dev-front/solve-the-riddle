@@ -29,8 +29,9 @@
 }
 
 .riddle_expander {
-  position: absolute;
-  right: 10px;
+  position: relative;
+  margin-left: auto;
+  padding-right: 10px;
 }
 
 .riddle_answerBlock {
