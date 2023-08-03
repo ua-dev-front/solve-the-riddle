@@ -17,42 +17,46 @@
   overflow: hidden;
 }
 
-.incorrect .riddle_block::after,
-.incorrect .riddle_answerBlock::after {
+.riddle_block::before,
+.riddle_answerBlock::before {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.riddle_block::after,
+.riddle_answerBlock::after {
   content: '';
   position: absolute;
-  top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, rgba(190, 52, 107, 0.25) 0%, rgba(190, 52, 107, 0.1) 100%);
+  top: 0;
+  right: 0;
+  bottom: 0;
   opacity: 0;
-  animation: fadeIn 0.3s ease forwards;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  background: linear-gradient(90deg, rgba(190, 52, 107, 0.25) 0%, rgba(190, 52, 107, 0.1) 100%);
+}
+
+.incorrect .riddle_block::before,
+.incorrect .riddle_answerBlock::before {
+  opacity: 0;
+}
+
+.incorrect .riddle_block::after,
+.incorrect .riddle_answerBlock::after {
+  opacity: 1;
 }
 
 .correct .riddle_block::after,
 .correct .riddle_answerBlock::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   background: linear-gradient(90deg, rgba(107, 190, 52, 0.25) 0%, rgba(107, 190, 52, 0.1) 100%);
-  opacity: 0;
-  animation: fadeIn 0.3s ease forwards;
+  opacity: 1;
 }
 
+.riddle_answerBlock::after,
 .incorrect .riddle_answerBlock::after,
 .correct .riddle_answerBlock::after {
-  border-radius: 0 0 20px 20px;;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-    pointer-events: none;
-  }
+  border-radius: 0 0 20px 20px;
 }
 
 .expanded .riddle_block {
@@ -95,10 +99,10 @@
   padding: 10px 0;
 }
 
-.riddle_answerBlock::before {
-  content: '';
+.riddle_answerLine {
   position: absolute;
   top: 0;
+  margin: auto;
   width: 95%;
   height: 1px;
   border-bottom: 1px dashed;

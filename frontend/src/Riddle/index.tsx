@@ -46,6 +46,25 @@ function Riddle({ riddle, id, creationDate }: RiddleProps) {
         const response: ResponseData = await initialResponse.json();
         setIndicator(response.correct ? AnswerStatus.Correct : AnswerStatus.Incorrect);
         setDisabled(response.correct);
+        if (!response.correct) {
+            const riddleBlock = document.querySelector('.incorrect .riddle_block') as HTMLElement;
+            const riddleAnswerBlock = document.querySelector('.incorrect .riddle_answerBlock') as HTMLElement;
+
+            // Додаємо клас "animate" для запуску анімації
+            if (riddleBlock) {
+                riddleBlock.classList.add('animate');
+                setTimeout(() => {
+                    riddleBlock.classList.remove('animate');
+                }, 300);
+            }
+
+            if (riddleAnswerBlock) {
+                riddleAnswerBlock.classList.add('animate');
+                setTimeout(() => {
+                    riddleAnswerBlock.classList.remove('animate');
+                }, 300);
+            }
+        }
     }
 
     function isAnswerValid() {
@@ -58,8 +77,9 @@ function Riddle({ riddle, id, creationDate }: RiddleProps) {
     }, [isExpanded, id]);
 
     const riddleClassName = `${isExpanded ? 'expanded' : ''} ${
-        indicator === AnswerStatus.Correct ? 'correct' : indicator === AnswerStatus.Incorrect ? 'incorrect' : ''
+        indicator === AnswerStatus.Correct ? 'correct' : indicator === AnswerStatus.Incorrect ? 'incorrect' : 'static'
     }`;
+    console.log(riddleClassName)
 
     return (
         <div className={`riddle ${riddleClassName}`}>
@@ -77,6 +97,7 @@ function Riddle({ riddle, id, creationDate }: RiddleProps) {
             </div>
             <div className={`riddle_answerBlock ${isExpanded ? 'expanded' : ''}`}
                  style={{ height: `${answerBlockHeight}px` }} id={`answerBlock-${id}`}>
+                <div className="riddle_answerLine"></div>
                 <Input value={answer} disabled={disabled}
                        onChange={(newAnswer) => {
                            setAnswer(newAnswer);
