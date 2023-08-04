@@ -46,25 +46,6 @@ function Riddle({ riddle, id, creationDate }: RiddleProps) {
         const response: ResponseData = await initialResponse.json();
         setIndicator(response.correct ? AnswerStatus.Correct : AnswerStatus.Incorrect);
         setDisabled(response.correct);
-        if (!response.correct) {
-            const riddleBlock = document.querySelector('.incorrect .riddle_block') as HTMLElement;
-            const riddleAnswerBlock = document.querySelector('.incorrect .riddle_answerBlock') as HTMLElement;
-
-            // Додаємо клас "animate" для запуску анімації
-            if (riddleBlock) {
-                riddleBlock.classList.add('animate');
-                setTimeout(() => {
-                    riddleBlock.classList.remove('animate');
-                }, 300);
-            }
-
-            if (riddleAnswerBlock) {
-                riddleAnswerBlock.classList.add('animate');
-                setTimeout(() => {
-                    riddleAnswerBlock.classList.remove('animate');
-                }, 300);
-            }
-        }
     }
 
     function isAnswerValid() {
