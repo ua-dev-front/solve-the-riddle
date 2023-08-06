@@ -37,29 +37,29 @@
   background: linear-gradient(90deg, rgba(190, 52, 107, 0.25) 0%, rgba(190, 52, 107, 0.1) 100%);
 }
 
-.incorrect .riddle_block::before,
-.incorrect .riddle_answerBlock::before {
+.riddle-incorrect .riddle_block::before,
+.riddle-incorrect .riddle_answerBlock::before {
   opacity: 0;
 }
 
-.incorrect .riddle_block::after,
-.incorrect .riddle_answerBlock::after {
+.riddle-incorrect .riddle_block::after,
+.riddle-incorrect .riddle_answerBlock::after {
   opacity: 1;
 }
 
-.correct .riddle_block::after,
-.correct .riddle_answerBlock::after {
+.riddle-correct .riddle_block::after,
+.riddle-correct .riddle_answerBlock::after {
   background: linear-gradient(90deg, rgba(107, 190, 52, 0.25) 0%, rgba(107, 190, 52, 0.1) 100%);
   opacity: 1;
 }
 
 .riddle_answerBlock::after,
-.incorrect .riddle_answerBlock::after,
-.correct .riddle_answerBlock::after {
+.riddle-incorrect .riddle_answerBlock::after,
+.riddle-correct .riddle_answerBlock::after {
   border-radius: 0 0 20px 20px;
 }
 
-.expanded .riddle_block {
+.riddle-expanded .riddle_block {
   border-radius: 20px 20px 0 0;
 }
 
@@ -91,7 +91,7 @@
   transition: opacity 0.2s ease, height 0.3s ease-out, visibility 0s linear 0.3s;
 }
 
-.riddle_answerBlock.expanded {
+.riddle_answerBlock.riddle-expanded {
   visibility: visible;
   opacity: 1;
   height: auto;
