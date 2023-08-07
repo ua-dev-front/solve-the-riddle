@@ -57,22 +57,19 @@ function Riddle({ riddle, id, creationDate }: RiddleProps) {
             : 0);
     }, [isExpanded, id]);
 
-    let riddleClassName = '';
-
-    if (isExpanded) {
-        riddleClassName += 'riddle-expanded ';
-    }
-
+    let correctness = '';
     if (indicator === AnswerStatus.Correct) {
-        riddleClassName += 'riddle-correct ';
+        correctness = 'riddle-correct';
     } else if (indicator === AnswerStatus.Incorrect) {
-        riddleClassName += 'riddle-incorrect ';
+        correctness = 'riddle-incorrect';
     }
+
+    const riddleClassName = `${isExpanded ? 'riddle-expanded' : ''} ${correctness}`;
 
     return (
         <div className={`riddle ${riddleClassName}`}>
             <div className="riddle_date">#{id}, {new Date(creationDate).toLocaleDateString()}</div>
-            <div className={`riddle_block ${isExpanded ? 'riddle-expanded' : ''}`}>
+            <div className={`riddle_block ${isExpanded ? 'riddle_block-expanded' : ''}`}>
                 <div className="riddle_text">{riddle}</div>
                 <div className="riddle_expander">
                     <ExpanderButton text={buttonText} isExpanded={isExpanded}
@@ -83,7 +80,7 @@ function Riddle({ riddle, id, creationDate }: RiddleProps) {
                     />
                 </div>
             </div>
-            <div className={`riddle_answerBlock ${isExpanded ? 'riddle-expanded' : ''}`}
+            <div className={`riddle_answerBlock ${isExpanded ? 'riddle_answerBlock-expanded' : ''}`}
                  style={{ height: `${answerBlockHeight}px` }} id={`answerBlock-${id}`}>
                 <div className="riddle_answerLine"></div>
                 <Input value={answer} disabled={disabled}
