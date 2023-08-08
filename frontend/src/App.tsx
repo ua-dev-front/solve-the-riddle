@@ -1,5 +1,6 @@
 import MenuBar from './MenuBar';
 import Riddles from './Riddles';
+import SignInButton from './SignInButton';
 import './App.css';
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
         <div className="app">
             <MenuBar />
             <Riddles />
+            <SignInButton />
         </div>
     );
 }
