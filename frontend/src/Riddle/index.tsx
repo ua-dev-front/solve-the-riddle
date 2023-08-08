@@ -57,17 +57,8 @@ function Riddle({ riddle, id, creationDate }: RiddleProps) {
             : 0);
     }, [isExpanded, id]);
 
-    let correctness = '';
-    if (indicator === AnswerStatus.Correct) {
-        correctness = 'riddle-correct';
-    } else if (indicator === AnswerStatus.Incorrect) {
-        correctness = 'riddle-incorrect';
-    }
-
-    const riddleClassName = `${isExpanded ? 'riddle-expanded' : ''} ${correctness}`;
-
     return (
-        <div className={`riddle ${riddleClassName}`}>
+        <div className={`riddle ${isExpanded ? 'riddle-expanded' : ''} riddle-${indicator}`}>
             <div className="riddle_date">#{id}, {new Date(creationDate).toLocaleDateString()}</div>
             <div className={`riddle_block ${isExpanded ? 'riddle_block-expanded' : ''}`}>
                 <div className="riddle_text">{riddle}</div>
