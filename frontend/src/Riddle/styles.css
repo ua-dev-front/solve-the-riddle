@@ -88,7 +88,7 @@
   opacity: 0;
   height: 0;
   visibility: hidden;
-  transition: opacity 0.2s ease, height 0.3s ease-out, visibility 0s linear 0.3s;
+  transition: opacity 0.2s ease, height 0.3s ease-out, visibility 0.3s linear 0.3s;
 }
 
 .riddle_answerBlock-expanded {
