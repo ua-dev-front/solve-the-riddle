@@ -60,34 +60,36 @@ function Riddle({ riddle, id, creationDate }: RiddleProps) {
     return (
         <div className={`riddle ${isExpanded ? 'riddle-expanded' : ''} riddle-${indicator}`}>
             <div className="riddle_date">#{id}, {new Date(creationDate).toLocaleDateString()}</div>
-            <div className={`riddle_block ${isExpanded ? 'riddle_block-expanded' : ''}`}>
-                <div className="riddle_text">{riddle}</div>
-                <div className="riddle_expander">
-                    <ExpanderButton text={buttonText} isExpanded={isExpanded}
-                        onClick={async (isExpanded) => {
-                            setIsExpanded(isExpanded);
-                            setTimeout(() => 200);
-                        }}
-                    />
+            <div className="riddle_container">
+                <div className={`riddle_block ${isExpanded ? 'riddle_block-expanded' : ''}`}>
+                    <div className="riddle_text">{riddle}</div>
+                    <div className="riddle_expander">
+                        <ExpanderButton text={buttonText} isExpanded={isExpanded}
+                            onClick={async (isExpanded) => {
+                                setIsExpanded(isExpanded);
+                                setTimeout(() => 200);
+                            }}
+                        />
+                    </div>
                 </div>
-            </div>
-            <div className={`riddle_answerBlock ${isExpanded ? 'riddle_answerBlock-expanded' : ''}`}
-                 style={{ height: `${answerBlockHeight}px` }} id={`answerBlock-${id}`}>
-                <div className="riddle_answerLine"></div>
-                <Input value={answer} disabled={disabled}
-                       onChange={(newAnswer) => {
-                           setAnswer(newAnswer);
-                           if (indicator === AnswerStatus.Incorrect) {
-                               setIndicator(AnswerStatus.Unverified);
-                           }
-                       }}
-                       onKeyPress={(event) => {
-                           if (event.key === 'Enter' && isAnswerValid()) {
-                               verify(id);
-                           }
-                       }}
-                />
-                <AnswerIndicator indicator={indicator} onClick={() => verify(id)} disabled={!isAnswerValid()}/>
+                <div className={`riddle_answerBlock ${isExpanded ? 'riddle_answerBlock-expanded' : ''}`}
+                     style={{ height: `${answerBlockHeight}px` }} id={`answerBlock-${id}`}>
+                    <div className="riddle_answerLine"></div>
+                    <Input value={answer} disabled={disabled}
+                           onChange={(newAnswer) => {
+                               setAnswer(newAnswer);
+                               if (indicator === AnswerStatus.Incorrect) {
+                                   setIndicator(AnswerStatus.Unverified);
+                               }
+                           }}
+                           onKeyPress={(event) => {
+                               if (event.key === 'Enter' && isAnswerValid()) {
+                                   verify(id);
+                               }
+                           }}
+                    />
+                    <AnswerIndicator indicator={indicator} onClick={() => verify(id)} disabled={!isAnswerValid()}/>
+                </div>
             </div>
         </div>
     );
