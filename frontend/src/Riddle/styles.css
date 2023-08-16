@@ -8,7 +8,6 @@
 }
 
 .riddle_container {
-  background: linear-gradient(90deg, #f7f7f7 0%, rgba(246, 246, 246, 1) 100%);
   border-radius: 20px;
   transition: background-color 0.3s ease;
   position: relative;
@@ -20,9 +19,17 @@
 }
 
 .riddle_container::before{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   border-radius: 20px;
   opacity: 1;
   transition: opacity 0.3s ease;
+  background-image: linear-gradient(90deg, #f7f7f7 0%, rgba(246, 246, 246, 1) 100%);
+  z-index: -1;
 }
 
 .riddle_container::after {
@@ -30,13 +37,14 @@
   border-radius: 20px;
   position: absolute;
   left: 0;
-  top: 0;
-  right: 0;
   bottom: 0;
   opacity: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   transition: opacity 0.3s ease;
   background: linear-gradient(90deg, rgba(190, 52, 107, 0.25) 0%, rgba(190, 52, 107, 0.1) 100%);
+  z-index: -1;
 }
 
 .riddle-incorrect .riddle_container::before {
@@ -76,16 +84,14 @@
   position: relative;
   opacity: 0;
   height: 0;
-  visibility: hidden;
   overflow: hidden;
-  transition: opacity 0.2s ease, height 0.3s ease-out, visibility 0.3s linear 0.3s, padding 0.4s;
+  transition: opacity 0.2s ease-out, height 0.3s ease-out, visibility 0.3s linear, padding 0.4s linear;
 }
 
 .riddle_answerBlock-expanded {
-  visibility: visible;
   opacity: 1;
   height: auto;
-  transition-delay: 0.1s;
+  transition-delay: 0.01s;
   padding: 15px 0;
 }
 
