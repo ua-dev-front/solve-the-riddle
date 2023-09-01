@@ -18,7 +18,7 @@
   align-items: center;
 }
 
-.riddle_container::before{
+.riddle_container::before {
   content: '';
   position: absolute;
   bottom: 0;
@@ -85,13 +85,12 @@
   opacity: 0;
   height: 0;
   overflow: hidden;
-  transition: opacity 0.2s ease-out, height 0.3s ease-out, visibility 0.3s linear, padding 0.4s linear;
+  transition: opacity 10.2s ease-out, height 10.3s ease-out, visibility 10.3s linear, padding 10.4s linear;
 }
 
 .riddle_answerBlock-expanded {
   opacity: 1;
   height: auto;
-  transition-delay: 0.01s;
   padding: 15px 0;
 }
 
