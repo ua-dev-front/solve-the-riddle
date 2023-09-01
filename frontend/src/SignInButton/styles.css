@@ -1,7 +1,7 @@
 .signInButton {
-    position: absolute;
-    left: calc(50% + 190px);
-    top: 25px;
+    position: relative;
+    left: 290px;
+    top: 5px;
     width: 70px;
     height: 30px;
     font-family: Inter, serif;
@@ -28,6 +28,12 @@
 
 @media screen and (max-width: 632px) {
     .signInButton {
-        left: calc(100% - 120px);
+        left: calc(100% - 85px);
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .signInButton {
+        left: 0;
     }
 }
