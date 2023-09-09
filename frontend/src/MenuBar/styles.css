@@ -25,6 +25,8 @@
 }
 
 .menuBar_rightBorder {
+  display: flex;
+  justify-content: right;
   position: relative;
   width: calc(50% + 99px);
   border-bottom: 1px solid black;
