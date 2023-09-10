@@ -7,16 +7,60 @@
   position: relative;
 }
 
+.riddle_container {
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+
 .riddle_block {
   display: flex;
   align-items: center;
-  background: linear-gradient(90deg, #f7f7f7 0%, rgba(246, 246, 246, 1) 100%);
-  border-radius: 20px;
-  transition: border-radius 0.3s ease;
 }
 
-.expanded .riddle_block {
-  border-radius: 20px 20px 0 0;
+.riddle_container::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  background-image: linear-gradient(90deg, #f7f7f7 0%, rgba(246, 246, 246, 1) 100%);
+  z-index: -1;
+}
+
+.riddle_container::after {
+  content: '';
+  border-radius: 20px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  background: linear-gradient(90deg, rgba(190, 52, 107, 0.25) 0%, rgba(190, 52, 107, 0.1) 100%);
+  z-index: -1;
+}
+
+.riddle-incorrect .riddle_container::before {
+  opacity: 0;
+  border-radius: 20px;
+}
+
+.riddle-incorrect .riddle_container::after {
+  opacity: 1;
+  border-radius: 20px;
+}
+
+.riddle-correct .riddle_container::after {
+  background: linear-gradient(90deg, rgba(107, 190, 52, 0.25) 0%, rgba(107, 190, 52, 0.1) 100%);
+  opacity: 1;
+  border-radius: 20px;
 }
 
 .riddle_text {
@@ -38,28 +82,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 0 10px 0;
-  border-radius: 0 0 20px 20px;
-  background: linear-gradient(90deg, #f7f7f7 0%, rgba(246, 246, 246, 1) 100%);
   position: relative;
   opacity: 0;
   height: 0;
-  visibility: hidden;
-  transition: opacity 0.2s ease, height 0.3s ease-out, visibility 0s linear 0.3s;
+  overflow: hidden;
+  transition: opacity 0.2s ease-out, height 0.3s ease-out, visibility 0.3s linear, padding 0.4s linear;
 }
 
-.riddle_answerBlock.expanded {
-  visibility: visible;
+.riddle_answerBlock-expanded {
   opacity: 1;
   height: auto;
-  transition-delay: 0.1s;
-  padding: 10px 0;
+  padding: 15px 0;
 }
 
-.riddle_answerBlock::before {
-  content: '';
+.riddle_answerLine {
   position: absolute;
   top: 0;
+  margin: auto;
   width: 95%;
   height: 1px;
   border-bottom: 1px dashed;
