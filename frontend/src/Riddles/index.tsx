@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Riddle, { RiddleProps } from '../Riddle';
 import Preloader from './Preloader.svg';
-import './styles.css';
+import './styles.scss';
 
 interface ResponseData {
     riddles: RiddleProps[];
