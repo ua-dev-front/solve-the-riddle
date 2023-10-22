@@ -5,10 +5,10 @@ import Button from '../Button';
 import './styles.css';
 
 export enum AnswerStatus {
-    Correct,
-    Incorrect,
-    Loading,
-    Unverified
+    Correct = 'correct',
+    Incorrect = 'incorrect',
+    Loading = 'loading',
+    Unverified = 'unverified'
 }
 
 interface BaseProps {

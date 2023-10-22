@@ -1,0 +1,13 @@
+@import '../var';
+
+.riddles {
+    margin: auto;
+    width: min(100% - 70px, $riddles_width);
+    position: relative;
+
+    &_preloader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

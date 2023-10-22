@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import './styles.css';
+import './styles.scss';
 
 interface MenuBarProps {
     signInButton: ReactNode;
