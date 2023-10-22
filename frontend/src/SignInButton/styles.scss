@@ -1,6 +1,8 @@
+@import '../var';
+
 .signInButton {
     position: relative;
-    right: calc(100% - 355px);
+    right: calc(100% - $riddles_width + 205px);
     top: 5px;
     height: 30px;
     font-family: Inter, serif;
@@ -14,24 +16,20 @@
     cursor: pointer;
     border-radius: 4px;
     transition: background-color 0.15s ease-in-out;
-}
 
-.signInButton:hover {
-    background: rgba(52, 107, 190, 0.15);
-}
+    &:hover {
+        background: rgba(52, 107, 190, 0.15);
+    }
 
-.signInButton:active {
-    background: rgba(52, 107, 190, 0.3);
-}
+    &:active {
+        background: rgba(52, 107, 190, 0.3);
+    }
 
-@media screen and (max-width: 632px) {
-    .signInButton {
+    @media screen and (max-width: 632px) {
         right: 20px;
     }
-}
 
-@media screen and (max-width: 350px) {
-    .signInButton {
+    @media screen and (max-width: 350px) {
         margin: 0 auto;
         right: 0;
     }
