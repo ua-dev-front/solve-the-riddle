@@ -1,0 +1,33 @@
+.signInButton {
+    position: relative;
+    top: 5px;
+    height: 30px;
+    font-family: Inter, serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: #945D0B;
+    background-color: transparent;
+    border: none;
+    font-style: normal;
+    text-decoration-line: underline;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.15s ease-in-out;
+
+    &:hover {
+        background: rgba(52, 107, 190, 0.15);
+    }
+
+    &:active {
+        background: rgba(52, 107, 190, 0.3);
+    }
+
+    @media screen and (max-width: 632px) {
+        right: 20px;
+    }
+
+    @media screen and (max-width: 350px) {
+        margin: 0 auto;
+        right: 0;
+    }
+}
