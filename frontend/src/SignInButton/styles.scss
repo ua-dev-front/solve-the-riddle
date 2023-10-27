@@ -1,8 +1,5 @@
-@import '../var';
-
 .signInButton {
     position: relative;
-    right: calc(100% - $riddles_width + 205px);
     top: 5px;
     height: 30px;
     font-family: Inter, serif;
