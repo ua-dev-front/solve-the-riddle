@@ -9,7 +9,7 @@ function MenuBar({ signInButton }: MenuBarProps) {
     return (
         <div className="menuBar">
             <div className="menuBar_extremeBorder"></div>
-            <div className="menuBar_ViewRiddles">View Riddles</div>
+            <div className="menuBar_viewRiddles">View Riddles</div>
             <div className="menuBar_centerBorder"></div>
             <div className="menuBar_signInButton">{signInButton}</div>
             <div className="menuBar_extremeBorder"></div>
