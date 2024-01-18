@@ -1,8 +1,12 @@
 import './styles.scss';
 
-function SignInButton() {
+interface Props {
+    onClick?: () => void;
+}
+
+function SignInButton({onClick}: Props) {
     return (
-        <button className="signInButton">Sign in</button>
+        <button className="signInButton" onClick={onClick}>Sign in</button>
     );
 }
 

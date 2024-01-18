@@ -1,0 +1,87 @@
+.signInForm {
+    width: 357px;
+    height: 177px;
+    position: relative;
+    display: flex;
+    border-radius: 4px;
+    background: #FFFFFF;
+    flex-direction: column;
+    box-shadow: 5px 5px 5px 0 #00000080;
+}
+
+.signInForm_close-button {
+    margin-left: calc(100% - 30px);
+    margin-top: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.signInForm_close-button:hover .close-image {
+    content: url('CloseHover.svg');
+}
+
+.signInForm_login-form {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 10px;
+}
+
+.signInForm_login label, .signInForm_password label {
+    font-family: Inter, serif;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 16px;
+}
+
+.signInForm_login input, .signInForm_password input {
+    border: 1px solid #945D0B;
+    width: 180px;
+    height: 23px;
+    border-radius: 2px;
+}
+
+.signInForm_login input:focus, .signInForm_password input:focus {
+    outline: none;
+    border-color: #346BBE;
+}
+
+.signInForm_password {
+    margin: 15px 11px 15px 0;
+}
+
+.signInForm_sign-button {
+    width: 59px;
+    height: 23px;
+    border-radius: 2px;
+    border: 1px solid #945D0B;
+    background-color: #FFFFFF;
+    color: #945D0B;
+    cursor: pointer;
+}
+
+.signInForm_sign-button:hover {
+    background: rgba(52, 107, 190, 0.15);
+}
+
+.signInForm_sign-button:active {
+     background: rgba(52, 107, 190, 0.3);
+}
+
+.signInForm_register-button {
+    width: 106px;
+    height: 16px;
+    font: 300 10px Inter, serif;
+    color: #945D0B;
+    text-decoration-line: underline;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    line-height: 12px;
+    letter-spacing: 0;
+    text-align: center;
+    margin-top: 10px;
+}
