@@ -1,7 +1,7 @@
 @import '../var';
 
 .riddles {
-    margin: auto;
+    margin: 0 auto;
     width: min(100% - 70px, $riddles_width);
     position: relative;
 
@@ -9,5 +9,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        height: 100vh;
     }
 }

@@ -18,7 +18,8 @@
 }
 
 .signInForm_close-button:hover .close-image {
-    content: url('CloseHover.svg');
+    filter: invert(31%) sepia(67%) saturate(2838%) hue-rotate(33deg) brightness(87%) contrast(91%);
+    transition: filter 0.3s ease;
 }
 
 .signInForm_login-form {
@@ -28,13 +29,11 @@
     align-items: center;
     flex-direction: column;
     padding-top: 10px;
-}
-
-.signInForm_login label, .signInForm_password label {
     font-family: Inter, serif;
     font-size: 13px;
     font-weight: 300;
     line-height: 16px;
+
 }
 
 .signInForm_login input, .signInForm_password input {
@@ -61,6 +60,7 @@
     background-color: #FFFFFF;
     color: #945D0B;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .signInForm_sign-button:hover {
@@ -72,7 +72,6 @@
 }
 
 .signInForm_register-button {
-    width: 106px;
     height: 16px;
     font: 300 10px Inter, serif;
     color: #945D0B;
@@ -84,4 +83,15 @@
     letter-spacing: 0;
     text-align: center;
     margin-top: 10px;
+    transition: background-color 0.15s ease-in-out;
+    border-radius: 2px;
+
+}
+
+.signInForm_register-button:hover {
+    background: rgba(52, 107, 190, 0.15);
+}
+
+.signInForm_register-button:active {
+     background: rgba(52, 107, 190, 0.3);
 }
