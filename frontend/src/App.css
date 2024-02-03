@@ -54,6 +54,10 @@ html, body {
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
+.app-signInForm, .app-signInForm-visible {
+    z-index: 2;
+}
+
 .app-signInForm {
     opacity: 0;
     visibility: hidden;
@@ -62,5 +66,4 @@ html, body {
 .app-signInForm-visible {
     opacity: 1;
     visibility: visible;
-    z-index: 2;
 }

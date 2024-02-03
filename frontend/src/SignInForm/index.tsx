@@ -16,7 +16,7 @@ function SignInForm({onClick}: Props) {
                     Логін: <input />
                 </div>
                 <div className="signInForm_password">
-                    Пароль: <input />
+                    Пароль: <input type="password" />
                 </div>
                 <button className="signInForm_sign-button">Увійти</button>
                 <button className="signInForm_register-button">Зареєструватися</button>

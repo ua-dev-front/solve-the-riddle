@@ -17,30 +17,39 @@
     background-color: transparent;
 }
 
-.signInForm_close-button:hover .close-image {
-    filter: invert(31%) sepia(67%) saturate(2838%) hue-rotate(33deg) brightness(87%) contrast(91%);
+.close-image {
     transition: filter 0.3s ease;
 }
 
+.signInForm_close-button:hover .close-image {
+    filter: invert(31%) sepia(67%) saturate(2838%) hue-rotate(33deg) brightness(87%) contrast(91%);
+}
+
 .signInForm_login-form {
+    font: 300 13px Inter, serif;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding-top: 10px;
-    font-family: Inter, serif;
-    font-size: 13px;
-    font-weight: 300;
     line-height: 16px;
-
 }
 
 .signInForm_login input, .signInForm_password input {
     border: 1px solid #945D0B;
+    font-family: Inter, serif;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 16px;
+    letter-spacing: 0;
     width: 180px;
     height: 23px;
     border-radius: 2px;
+}
+
+.signInForm_password input {
+    font: small-caption;
 }
 
 .signInForm_login input:focus, .signInForm_password input:focus {
@@ -53,7 +62,9 @@
 }
 
 .signInForm_sign-button {
-    width: 59px;
+    font: 300 13px Inter, serif;
+    line-height: 16px;
+    text-align: center;
     height: 23px;
     border-radius: 2px;
     border: 1px solid #945D0B;
@@ -72,8 +83,8 @@
 }
 
 .signInForm_register-button {
-    height: 16px;
     font: 300 10px Inter, serif;
+    height: 16px;
     color: #945D0B;
     text-decoration-line: underline;
     cursor: pointer;
@@ -85,7 +96,6 @@
     margin-top: 10px;
     transition: background-color 0.15s ease-in-out;
     border-radius: 2px;
-
 }
 
 .signInForm_register-button:hover {
