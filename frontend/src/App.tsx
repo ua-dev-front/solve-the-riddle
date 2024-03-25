@@ -10,15 +10,13 @@ function App() {
 
     useEffect(() => {
         function handleKeyPress(event: KeyboardEvent) {
-            if (event.key === "Escape" && isSignInFormVisible) {
+            if (event.key === 'Escape' && isSignInFormVisible) {
                 setIsSignInFormVisible(false);
             }
         }
         document.addEventListener('keydown', handleKeyPress);
 
-        return () => {
-            document.removeEventListener('keydown', handleKeyPress);
-        };
+        return () => document.removeEventListener('keydown', handleKeyPress);
     }, [isSignInFormVisible]);
 
     function toggleForm() {
