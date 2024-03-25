@@ -8,8 +8,62 @@ html, body {
 }
 
 .app {
+    position: relative;
     min-width: 320px;
     display: flex;
     flex-direction: column;
     height: 100%;
+}
+
+.app-mainWindow {
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease;
+    height: 100%;
+}
+
+.app-mainWindow-unavailable {
+    overflow: hidden;
+}
+
+.app-mainWindow-overlay,
+.app-mainWindow-overlay-active {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.app-mainWindow-overlay {
+    z-index: 0;
+    transition: background-color 0.3s ease, z-index 0.3s step-end;
+}
+
+.app-mainWindow-overlay-active {
+    background-color: rgba(0, 0, 0, 0.65);
+    z-index: 2;
+    transition: background-color 0.3s ease;
+}
+
+.app-signInForm, .app-signInForm-visible {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.app-signInForm, .app-signInForm-visible {
+    z-index: 2;
+}
+
+.app-signInForm {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.app-signInForm-visible {
+    opacity: 1;
+    visibility: visible;
 }
